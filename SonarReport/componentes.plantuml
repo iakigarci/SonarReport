@@ -1,0 +1,27 @@
+@startuml components
+
+
+node "Sonarqube" {
+    database "SonarQubeDB" {
+
+    }
+    cloud {
+        [SonarAPI] --> SonarQubeDB :uses
+    }
+    HTTP - [SonarAPI]
+}
+
+package "SonarReport" {
+    [org.sonar.api] -up- import
+    [SonarReport] --> [SonarReportWS]
+    [SonarReportWS] --> [HTTP]
+    [SonarReport] -right-> import
+    [org.sonar.api] <<lib>>
+}
+
+node "Desktop" {
+    [CommandLine] --> [SonarReport] :uses
+    [Browser] --> [SonarReport] :uses
+}
+
+@enduml
