@@ -3,6 +3,7 @@ package configuration;
 import java.util.ArrayList;
 
 import factories.ReportModelFactory;
+import models.Language;
 import models.Report;
 
 public class SonarRequestList {
@@ -18,16 +19,18 @@ public class SonarRequestList {
 		return miSonarRequestList;
 	}
 	
-	public void execute(ArrayList<ReportConfiguration> pReportConfigurationList) throws IllegalStateException {
-		
-		if(pReportConfigurationList.isEmpty()) {
+	public void execute(ArrayList<ReportConfiguration> pReportConfList) throws IllegalStateException {
+		SonarQubeServer.getSonarQubeServer().init("http://localhost:9000", false, 0, 0, 0, 0, false);
+		if(pReportConfList.isEmpty()) {
 			throw new IllegalStateException("Porfavor, otorga los parametros necesarios");
 		}
 		
 		ReportModelFactory reportModelFactory = new ReportModelFactory();
 		
-		for (int i = 0; i < pReportConfigurationList.size(); i++) {
-			Report report = reportModelFactory(pReportConfigurationList.get(i))
+		for(ReportConfiguration reportConf : pReportConfList){
+			reportModelFactory = new ReportModelFactory(reportConf);
+			Report report = reportModelFactory.create();
+			reportList.add(report);
 		}
 	}
 }

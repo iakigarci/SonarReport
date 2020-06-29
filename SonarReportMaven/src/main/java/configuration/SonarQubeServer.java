@@ -29,7 +29,7 @@ public class SonarQubeServer {
     	
     }
     
-	private void init(String url, boolean status, int versionMajor, int versionMinor, int versionRevision,
+	public void init(String url, boolean status, int versionMajor, int versionMinor, int versionRevision,
 			int versionBuild, boolean supported) {
 		this.url = url;
 		this.status = status;
@@ -39,4 +39,34 @@ public class SonarQubeServer {
 		this.versionBuild = versionBuild;
 		this.supported = supported;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public int getVersionMajor() {
+		return versionMajor;
+	}
+
+	public int getVersionMinor() {
+		return versionMinor;
+	}
+
+	public int getVersionRevision() {
+		return versionRevision;
+	}
+
+	public int getVersionBuild() {
+		return versionBuild;
+	}
+
+	public boolean isSupported() {
+		return supported;
+	}
+	
+	
 }
