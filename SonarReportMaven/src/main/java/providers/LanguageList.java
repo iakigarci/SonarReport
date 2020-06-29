@@ -21,7 +21,8 @@ public class LanguageList extends AbstractProvider{
 	}
 
 	public ArrayList<Language> getLanguageList() {
-		final JsonObject jo = request(String.format(API.GET_LANGUAGES.getCall(), SonarQubeServer.getSonarQubeServer().getUrl()));
+		String str = String.format(API.GET_LANGUAGES.getCall(), SonarQubeServer.getSonarQubeServer().getUrl());
+		final JsonObject jo = request(str);
         final Language[] languagesList = getGson().fromJson(jo.get(LANGUAGES_FIELD),Language[].class);
 
         // put data in a map to access it faster

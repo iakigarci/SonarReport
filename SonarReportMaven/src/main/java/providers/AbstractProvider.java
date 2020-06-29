@@ -22,7 +22,7 @@ public abstract class AbstractProvider {
 	
 	protected API api;
 	
-	protected Gson gson;
+	protected Gson gson = new Gson();
 	
 	
 	public AbstractProvider(ReportConfiguration projectRequest) {
@@ -35,7 +35,7 @@ public abstract class AbstractProvider {
         final String raw = stringRequest(request);
 
         // prepare json
-        JsonElement json = null;
+        JsonElement json;
 
         // verify that the server response was correct
         try {
@@ -45,7 +45,9 @@ public abstract class AbstractProvider {
 //            LOGGER.log(Level.SEVERE, e.getMessage(), e);
 //            throw new BadSonarQubeRequestException("Server answered: " + raw +
 //                    StringManager.SPACE + e.getMessage());
+        	e.printStackTrace();        	
         	System.out.println("a");
+        	json = null;
         }
 
         // get the json object version

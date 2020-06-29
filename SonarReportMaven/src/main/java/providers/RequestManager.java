@@ -132,10 +132,10 @@ public final class RequestManager {
                 .userAgent("admin")
                 .url(baseUrl);
 
-        // Set SonarQube authentication token.
-        if(!StringManager.getProperty(StringManager.SONAR_TOKEN).equals(token)) {
-            builder.credentials(token, null);
-        }
+        //TODO Set SonarQube authentication token.
+//        if(!StringManager.getProperty(StringManager.SONAR_TOKEN).equals(token)) {
+//            builder.credentials(token, null);
+//        }
 
         // Set proxy settings.
         if(!proxyHost.isEmpty()) {
