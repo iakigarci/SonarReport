@@ -22,7 +22,7 @@ public class ReportModelFactory {
 	public Report create() {
 		ProviderFactory providerF = new ProviderFactory(reportConf);
 		LanguageList languageList = providerF.create(LanguageList.class);
-		report = new Report("darkchess", reportConf.getAuthor(), reportConf.getVersion(), reportConf.getBranch(), languageList.getLanguageList()) 
+		report = new Report("darkchess", reportConf.getAuthor(), reportConf.getVersion(), reportConf.getBranch(), languageList.getLanguageList());
 
 		
 		System.out.println(report);

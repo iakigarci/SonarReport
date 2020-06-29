@@ -19,6 +19,7 @@ package providers;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+
 import org.sonarqube.ws.client.GetRequest;
 import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.WsResponse;
@@ -128,7 +129,7 @@ public final class RequestManager {
 
         // Initialize http connector builder.
         final HttpConnector.Builder builder = HttpConnector.newBuilder()
-                .userAgent("cnesreport")
+                .userAgent("admin")
                 .url(baseUrl);
 
         // Set SonarQube authentication token.
