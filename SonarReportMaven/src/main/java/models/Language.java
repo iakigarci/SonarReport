@@ -27,6 +27,10 @@ public class Language {
 		this.name = name;
 	}
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "key: "+key+" "+"name: "+name;
+	}
 	
 }

@@ -70,8 +70,14 @@ package models {
     }
 
     class Component {
-
+        String id;
+        String name;
+        String qualifier;
+        Language language;
+        String path;
+        List<Measure> measureList;
     }
+
 
     class Issue {
          String severity
@@ -173,6 +179,7 @@ LanguageList -down-> Language
 MeasureList -down-> Measure
 ProjectList -down-> Project
 Issue -down-> Comment
+Component -right-> Measure
 
 ReportModelFactory -> Report
 ProviderFactory -down-> AbstractProvider

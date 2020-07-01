@@ -38,8 +38,15 @@ public class Report {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		String str = ("El proyecto es: "+projectName+" "+projectAuthor+" "+projectDate+" "+branch+" "+languageList.toString());
-		return super.toString();
+		StringBuilder str = new StringBuilder("");
+		str.append("El proyecto es: ");
+		str.append(projectName+"\n");
+		str.append("Autor: "+projectAuthor+"\n");
+		str.append("Branch: "+branch+"\n");
+		str.append("LanguageList: "+languageList.toString()+"\n");
+
+		String text = str.toString();
+		return text;
 	}
 	
 	public String getProjectName() {

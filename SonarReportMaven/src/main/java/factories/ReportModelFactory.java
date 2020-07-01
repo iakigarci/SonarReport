@@ -25,7 +25,7 @@ public class ReportModelFactory {
 		report = new Report("darkchess", reportConf.getAuthor(), reportConf.getVersion(), reportConf.getBranch(), languageList.getLanguageList());
 
 		
-		System.out.println(report);
+		System.out.println(report.toString());
 		
 		return report;
 	}
