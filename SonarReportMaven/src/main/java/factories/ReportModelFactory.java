@@ -1,9 +1,11 @@
 package factories;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 import configuration.ReportConfiguration;
+import models.Issue;
 import models.Report;
+import providers.IssueList;
 import providers.LanguageList;
 
 public class ReportModelFactory {
@@ -22,10 +24,11 @@ public class ReportModelFactory {
     public Report create() {
         ProviderFactory providerF = new ProviderFactory(reportConf);
         LanguageList languageList = providerF.create(LanguageList.class);
-        report = new Report("darkchess", reportConf.getAuthor(), reportConf.getVersion(), reportConf.getBranch(),
-                languageList.getLanguageList());
+        IssueList issueList = providerF.create(IssueList.class);
+        report = new Report("darkchess", reportConf.getAuthor(), reportConf.getVersion(), reportConf.getBranch());
 
-
+        report.setLanguageList(languageList.getLanguageList());
+        report.setIssueList((ArrayList<Issue>) issueList.getIssueList());
         System.out.println(report.toString());
 
         return report;

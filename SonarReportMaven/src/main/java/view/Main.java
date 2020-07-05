@@ -42,7 +42,7 @@ public class Main {
         // System.out.println(outputFilePath);
 
         SonarRequestList sonarRList = SonarRequestList.getSonarRequestList();
-        ReportConfiguration conf = new ReportConfiguration("noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT");
+        ReportConfiguration conf = new ReportConfiguration("noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:darkchess");
         ArrayList<ReportConfiguration> l = new ArrayList<ReportConfiguration>();
         l.add(conf);
         sonarRList.execute(l);

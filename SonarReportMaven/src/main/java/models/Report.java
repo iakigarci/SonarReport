@@ -20,20 +20,21 @@ public class Report {
      * List of quality profiles used in the project
      */
     private String branch;
+    
     private ArrayList<Language> languageList;
+    
+    private ArrayList<Issue> issueList;
 
     /**
      * List of components in the project and their metrics
      */
 
-    public Report(String projectName, String projectAuthor, String projectDate, String branch,
-            ArrayList<Language> languageList) {
+    public Report(String projectName, String projectAuthor, String projectDate, String branch) {
         super();
         this.projectName = projectName;
         this.projectAuthor = projectAuthor;
         this.projectDate = projectDate;
         this.branch = branch;
-        this.languageList = languageList;
     }
 
     @Override
@@ -45,6 +46,7 @@ public class Report {
         str.append("Autor: " + projectAuthor + "\n");
         str.append("Branch: " + branch + "\n");
         str.append("LanguageList: " + languageList.toString() + "\n");
+        str.append("IssueList: " + issueList.toString() + "\n");
 
         String text = str.toString();
         return text;
@@ -90,5 +92,9 @@ public class Report {
         this.languageList = languageList;
     }
 
+    public void setIssueList(ArrayList<Issue> issueList) {
+        this.issueList = issueList;
+    }
 
+    
 }
