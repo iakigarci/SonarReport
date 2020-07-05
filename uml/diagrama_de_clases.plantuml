@@ -18,12 +18,12 @@ package providers {
 
     }
 
-    class MeasureList {
-
-    }
-
     class ProjectList {
 
+    }
+    
+    class MetricList {
+        Map<String,List<Measure>> metricMap
     }
 
 }
@@ -95,11 +95,13 @@ package models {
     }
 
     class Language {
-        
+        String key;
+        String name;
     }
 
     class Measure {
-        
+        String metric
+        String value
     }
 
     class Project {
@@ -123,15 +125,19 @@ package models {
         ComponentList componentList
     }
 
-    class Rule {
-        
+    class Metric {
+        String key
+        Enum type
+        String name
+        String description
+        String domain
+
     }
 }
 
 package configuration {
     class SonarRequestList {
         List<ReportConfiguration> list
-        List<Metric> metricList
         SonarQubeServer server
         boolean enableCSV
         +create() : void
@@ -170,20 +176,22 @@ package view <<Node>> {
 IssueList -up-|> AbstractProvider
 ComponentList -up-|> AbstractProvider
 LanguageList -up-|> AbstractProvider
-MeasureList -up-|> AbstractProvider
+MetricList -up-|> AbstractProvider
 ProjectList -up-|> AbstractProvider
+MetricList -[hidden]> ComponentList
 
 ComponentList -down-> Component
 IssueList -down-> Issue
 LanguageList -down-> Language
-MeasureList -down-> Measure
 ProjectList -down-> Project
 Issue -down-> Comment
-Component -right-> Measure
+MetricList -down-> Metric
+MetricList -down-> Measure
+Metric -> Measure
 
 ReportModelFactory -> Report
 ProviderFactory -down-> AbstractProvider
-ReportFactory -up-> AbstractExporter
+ReportFactory -down-> AbstractExporter
 ServerFactory -up-> SonarQubeServer
 ReportModelFactory -> ProviderFactory
 
@@ -194,13 +202,14 @@ SonarRequestList -left-> ReportConfiguration
 SonarRequestList -right-> SonarQubeServer
 SonarRequestList -down-> ReportModelFactory
 
+/'
 note "Creación de las listas de Modelos" as N1
 note "Instacia de Server" as N2
 note "MAIN para crear el Report" as N3
 note "Crea diferentes exportables" as N4
 N1 -up-> ProviderFactory
-N2 -up-> ServerFactory
+N2 -down-> ServerFactory
 N3 -down-> ReportModelFactory
-N4 -up-> ReportFactory  
-
+N4 -down-> ReportFactory  
+`/
 @enduml

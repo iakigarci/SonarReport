@@ -2,7 +2,7 @@ package configuration;
 
 public class SonarQubeServer {
 
-	private String url;
+    private String url;
     /** Status for server **/
     private boolean status;
     /** Number for major version **/
@@ -15,58 +15,58 @@ public class SonarQubeServer {
     private int versionBuild;
     /** True if cnesreport support this SonarQube version **/
     private boolean supported;
-    
+
     private static SonarQubeServer miSonarQubeServer;
-    
+
     public static SonarQubeServer getSonarQubeServer() {
-    	if( miSonarQubeServer==null ) {
-    		miSonarQubeServer = new SonarQubeServer();
-    	}
-    	return miSonarQubeServer;
+        if (miSonarQubeServer == null) {
+            miSonarQubeServer = new SonarQubeServer();
+        }
+        return miSonarQubeServer;
     }
 
     private SonarQubeServer() {
-    	
+
     }
-    
-	public void init(String url, boolean status, int versionMajor, int versionMinor, int versionRevision,
-			int versionBuild, boolean supported) {
-		this.url = url;
-		this.status = status;
-		this.versionMajor = versionMajor;
-		this.versionMinor = versionMinor;
-		this.versionRevision = versionRevision;
-		this.versionBuild = versionBuild;
-		this.supported = supported;
-	}
 
-	public String getUrl() {
-		return url;
-	}
+    public void init(String url, boolean status, int versionMajor, int versionMinor, int versionRevision,
+            int versionBuild, boolean supported) {
+        this.url = url;
+        this.status = status;
+        this.versionMajor = versionMajor;
+        this.versionMinor = versionMinor;
+        this.versionRevision = versionRevision;
+        this.versionBuild = versionBuild;
+        this.supported = supported;
+    }
 
-	public boolean isStatus() {
-		return status;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public int getVersionMajor() {
-		return versionMajor;
-	}
+    public boolean isStatus() {
+        return status;
+    }
 
-	public int getVersionMinor() {
-		return versionMinor;
-	}
+    public int getVersionMajor() {
+        return versionMajor;
+    }
 
-	public int getVersionRevision() {
-		return versionRevision;
-	}
+    public int getVersionMinor() {
+        return versionMinor;
+    }
 
-	public int getVersionBuild() {
-		return versionBuild;
-	}
+    public int getVersionRevision() {
+        return versionRevision;
+    }
 
-	public boolean isSupported() {
-		return supported;
-	}
-	
-	
+    public int getVersionBuild() {
+        return versionBuild;
+    }
+
+    public boolean isSupported() {
+        return supported;
+    }
+
+
 }

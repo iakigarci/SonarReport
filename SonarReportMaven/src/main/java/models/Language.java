@@ -2,35 +2,35 @@ package models;
 
 public class Language {
 
-	private String key;
-	private String name;
-	
-	public Language(String key, String name) {
-		super();
-		this.key = key;
-		this.name = name;
-	}
+    private String key;
+    private String name;
 
-	public String getKey() {
-		return key;
-	}
+    public Language(String key, String name) {
+        super();
+        this.key = key;
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getKey() {
+        return key;
+    }
 
-	public void setKey(String key) {
-		this.key = key;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "key: "+key+" "+"name: "+name;
-	}
-	
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "key: " + key + " " + "name: " + name;
+    }
+
 }

@@ -6,31 +6,21 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public abstract class AbstractProvider {
 
-	protected ReportConfiguration projectRequest;
-	
-	protected API api;
-	
-	protected Gson gson = new Gson();
-	
-	
-	public AbstractProvider(ReportConfiguration projectRequest) {
-		super();
-		this.projectRequest = projectRequest;
-	}
+    protected ReportConfiguration projectRequest;
 
-	public JsonObject request(final String request){
+    protected API api;
+
+    protected Gson gson = new Gson();
+
+
+    public AbstractProvider(ReportConfiguration projectRequest) {
+        super();
+        this.projectRequest = projectRequest;
+    }
+
+    public JsonObject request(final String request) {
         // do the request to the server and return a string answer
         final String raw = stringRequest(request);
 
@@ -42,12 +32,12 @@ public abstract class AbstractProvider {
             json = getGson().fromJson(raw, JsonElement.class);
         } catch (Exception e) {
             // log exception's message
-//            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-//            throw new BadSonarQubeRequestException("Server answered: " + raw +
-//                    StringManager.SPACE + e.getMessage());
-        	e.printStackTrace();        	
-        	System.out.println("a");
-        	json = null;
+            // LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            // throw new BadSonarQubeRequestException("Server answered: " + raw +
+            // StringManager.SPACE + e.getMessage());
+            e.printStackTrace();
+            System.out.println("a");
+            json = null;
         }
 
         // get the json object version
@@ -56,8 +46,8 @@ public abstract class AbstractProvider {
         try {
             jsonObject = json.getAsJsonObject();
         } catch (NullPointerException e) {
-            System.out.println("Empty server response, reason might be : " +
-                    "server certificate not in JRE/JDK truststore, ...");
+            System.out.println(
+                    "Empty server response, reason might be : " + "server certificate not in JRE/JDK truststore, ...");
         }
 
         // verify if an error occurred
@@ -67,12 +57,13 @@ public abstract class AbstractProvider {
 
     /**
      * Get the raw string response
+     * 
      * @param request the raw server of the request
      * @return the server's response as a string
      * @throws SonarQubeException When SonarQube server is not callable.
      * @throws BadSonarQubeRequestException if SonarQube Server sent an error
      */
-    protected String stringRequest(final String request){
+    protected String stringRequest(final String request) {
         // prepare the request by replacing some relevant special characters
         // replace spaces
         String preparedRequest = request.replace(" ", "%20");
@@ -83,18 +74,18 @@ public abstract class AbstractProvider {
         return RequestManager.getInstance().get(preparedRequest, projectRequest.getToken());
     }
 
-	public ReportConfiguration getProjectRequest() {
-		return projectRequest;
-	}
+    public ReportConfiguration getProjectRequest() {
+        return projectRequest;
+    }
 
-	public API getApi() {
-		return api;
-	}
+    public API getApi() {
+        return api;
+    }
 
-	public Gson getGson() {
-		return gson;
-	}
-    
-    
-    
+    public Gson getGson() {
+        return gson;
+    }
+
+
+
 }

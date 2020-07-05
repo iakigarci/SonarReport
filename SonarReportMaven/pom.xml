@@ -153,7 +153,7 @@
 				  <archive>
 					<manifest>
 						<!-- Jar file entry point -->
-						<mainClass>com.mkyong.core.utils.App</mainClass>
+						<mainClass>src.main.java.view.Main</mainClass>
 					</manifest>
 				  </archive>
 				</configuration>
