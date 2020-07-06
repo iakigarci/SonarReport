@@ -42,8 +42,10 @@ public class Main {
         // System.out.println(outputFilePath);
 
         SonarRequestList sonarRList = SonarRequestList.getSonarRequestList();
+        String[] issueFilter = {"", "", ""};
+        sonarRList.setIssueFilter(issueFilter);
         ReportConfiguration conf = new ReportConfiguration("noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:darkchess");
-        ReportConfiguration conf2 = new ReportConfiguration("noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:src/main/java/com/c0nrad/darkchess/engine/FogEngine.java");
+        ReportConfiguration conf2 = new ReportConfiguration("noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:darkchess:src/main/java/com/c0nrad/darkchess/engine/FogEngine.java");
         ArrayList<ReportConfiguration> l = new ArrayList<ReportConfiguration>();
         
 

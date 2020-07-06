@@ -4,26 +4,46 @@ package providers {
 
     abstract AbstractProvider {
         ReportConfiguration projectRequest
+        API api 
+        Gson gson
+        +AbstractProvider(ReportConfiguration projectRequest)
+        +request(String request) : JsonObject
+        +stringRequest(String request) : String
     }
 
     class ComponentList {
-
+        String "COMPONENT_FIELD"
+        List<Component> componentList;
+        +ComponentList(ReportConfiguration projectRequest)
+        +getComponentList() : List<Component>
     }
 
     class IssueList {
-
+        String "ISSUE_FIELD" 
+        List<Issue> issueList;
+        +IssueList(ReportConfiguration projectRequest)
+        +getIssueList() : List<Issue>
     }
 
     class LanguageList {
-
+        String "LANUGAGE_FIELD" 
+        List<Language> lanugageList;
+        +LanguageList(ReportConfiguration projectRequest)
+        +getLanguageList() : List<Language>
     }
 
     class ProjectList {
-
+        String "PROJECT_FIELD" 
+        List<Project> projectList;
+        +ProjectList(ReportConfiguration projectRequest)
+        +getProjectList() : List<Project>
     }
     
     class MetricList {
+        String "METRIC_FIELD" 
         Map<String,List<Measure>> metricMap
+        +MetricList(ReportConfiguration projectRequest)
+        +getMetricList() : List<Metric>
     }
 
 }
@@ -31,21 +51,24 @@ package providers {
 package factories {
     class ProviderFactory {
         ReportConfiguration projectRequest
-        +create(final Class<T> providerClass) : AbstractProvider 
+        +ProviderFactory(ReportConfiguration projectRequest)
+        +create(final Class<T> providerClass) : <T> AbstractProvider 
     }
 
     class ReportFactory {
-        +create(conf ReportConfiguration, model Report) : void
+        ExportConfiguration exportConf
+        +ReportFactory(ReportConfiguration projectRequest)
+        +create() : void
     }
 
     class ReportModelFactory {
         ReportConfiguration projectRequest
-        +ReportModelFactory(conf ReportConfiguration)
+        +ReportModelFactory(ReportConfiguration projectRequest)
     }
 
     class ServerFactory {
-        SonarQubeServer server
-        SonarQubeServer create()
+        +ServerFactory()
+        +create() : void
     }
 }
 
@@ -139,7 +162,7 @@ package configuration {
     class SonarRequestList {
         List<ReportConfiguration> list
         ExportConfiguration exportConf
-        +create() : void
+        +create(String[] args) : void
     }
 
     class ReportConfiguration {
@@ -204,12 +227,14 @@ Issue -down-> Comment
 MetricList -down-> Metric
 MetricList -down-> Measure
 Metric -> Measure
+Project -> LanguageList
 
 ReportModelFactory -> Report
 ProviderFactory -down-> AbstractProvider
 ReportFactory -down-> AbstractExporter
 ServerFactory -up-> SonarQubeServer
 ReportModelFactory -> ProviderFactory
+ReportFactory -> ExportConfiguration
 
 CSVExporter -up-|> AbstractExporter
 

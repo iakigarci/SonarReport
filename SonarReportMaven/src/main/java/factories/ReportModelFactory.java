@@ -3,6 +3,7 @@ package factories;
 import java.util.ArrayList;
 
 import configuration.ReportConfiguration;
+import configuration.SonarRequestList;
 import models.Issue;
 import models.Report;
 import providers.IssueList;
@@ -22,13 +23,14 @@ public class ReportModelFactory {
 
 
     public Report create() {
+        SonarRequestList sonarRequest = SonarRequestList.getSonarRequestList();
         ProviderFactory providerF = new ProviderFactory(reportConf);
         LanguageList languageList = providerF.create(LanguageList.class);
         IssueList issueList = providerF.create(IssueList.class);
-        report = new Report("darkchess", reportConf.getAuthor(), reportConf.getVersion(), reportConf.getBranch());
+        report = new Report("darkchess", reportConf.getAuthor(), reportConf.getVersion(), reportConf.getBranch(), reportConf.getComponentKey());
 
         report.setLanguageList(languageList.getLanguageList());
-        report.setIssueList((ArrayList<Issue>) issueList.getIssueList());
+        report.setIssueList((ArrayList<Issue>) issueList.getIssueList(sonarRequest.getIssueFilter()));
         System.out.println(report.toString());
 
         return report;

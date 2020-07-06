@@ -20,7 +20,7 @@ public abstract class AbstractProvider {
         this.projectRequest = projectRequest;
     }
 
-    public JsonObject request(final String request) {
+    public JsonObject request(String request) {
         // do the request to the server and return a string answer
         final String raw = stringRequest(request);
 
@@ -63,7 +63,7 @@ public abstract class AbstractProvider {
      * @throws SonarQubeException When SonarQube server is not callable.
      * @throws BadSonarQubeRequestException if SonarQube Server sent an error
      */
-    protected String stringRequest(final String request) {
+    protected String stringRequest(String request) {
         // prepare the request by replacing some relevant special characters
         // replace spaces
         String preparedRequest = request.replace(" ", "%20");
