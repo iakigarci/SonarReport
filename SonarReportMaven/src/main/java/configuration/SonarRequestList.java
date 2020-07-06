@@ -9,6 +9,7 @@ import models.Report;
 public class SonarRequestList {
 
     private ArrayList<Report> reportList;
+
     private static final SonarRequestList miSonarRequestList = new SonarRequestList();
 
     private SonarRequestList() {
@@ -33,4 +34,13 @@ public class SonarRequestList {
             reportList.add(report);
         }
     }
+
+    public ArrayList<Report> getReportList() {
+        return reportList;
+    }
+
+    public void setReportList(ArrayList<Report> reportList) {
+        this.reportList = reportList;
+    }
+    
 }

@@ -138,8 +138,7 @@ package models {
 package configuration {
     class SonarRequestList {
         List<ReportConfiguration> list
-        SonarQubeServer server
-        boolean enableCSV
+        ExportConfiguration exportConf
         +create() : void
     }
 
@@ -161,15 +160,32 @@ package configuration {
         int versionBuild
         boolean supported
     }
+
+    class Args {
+        List<Metric> metricList
+        List<Issue> issueList
+        List<String> issueTypeList
+        List<String> componentKeyList
+        ReportConfig reportConfig
+    }
+
+    class ExportConfiguration {
+        boolean enableCSV
+        boolean enableDOC
+    }
 }
 
 package view <<Node>> {
     class Browser {
-
+        +main() : void
     }
 
     class CommandLine {
+        +main() : void
+    }
 
+    class Plugin {
+        +main() : void
     }
 }
 
@@ -198,8 +214,9 @@ ReportModelFactory -> ProviderFactory
 CSVExporter -up-|> AbstractExporter
 
 CommandLine -down-> SonarRequestList
+Browser -down-> SonarRequestList
+Plugin -down-> SonarRequestList
 SonarRequestList -left-> ReportConfiguration
-SonarRequestList -right-> SonarQubeServer
 SonarRequestList -down-> ReportModelFactory
 
 /'

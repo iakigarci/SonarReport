@@ -43,8 +43,12 @@ public class Main {
 
         SonarRequestList sonarRList = SonarRequestList.getSonarRequestList();
         ReportConfiguration conf = new ReportConfiguration("noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:darkchess");
+        ReportConfiguration conf2 = new ReportConfiguration("noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:src/main/java/com/c0nrad/darkchess/engine/FogEngine.java");
         ArrayList<ReportConfiguration> l = new ArrayList<ReportConfiguration>();
+        
+
         l.add(conf);
+        l.add(conf2);
         sonarRList.execute(l);
     }
 
