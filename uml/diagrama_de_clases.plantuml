@@ -196,6 +196,12 @@ package configuration {
         boolean enableCSV
         boolean enableDOC
     }
+
+    enum API {
+        String call
+        +API(String call)
+        +getCall() : String
+    }
 }
 
 package view <<Node>> {

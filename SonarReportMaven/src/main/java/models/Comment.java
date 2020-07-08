@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * Comment associated to an Issue
+ */
 public class Comment {
 
     // Comment's key

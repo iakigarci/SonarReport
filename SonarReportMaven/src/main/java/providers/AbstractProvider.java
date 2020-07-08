@@ -40,7 +40,6 @@ public abstract class AbstractProvider {
             json = null;
         }
 
-        // get the json object version
         JsonObject jsonObject = null;
 
         try {
@@ -60,8 +59,6 @@ public abstract class AbstractProvider {
      * 
      * @param request the raw server of the request
      * @return the server's response as a string
-     * @throws SonarQubeException When SonarQube server is not callable.
-     * @throws BadSonarQubeRequestException if SonarQube Server sent an error
      */
     protected String stringRequest(String request) {
         // prepare the request by replacing some relevant special characters
