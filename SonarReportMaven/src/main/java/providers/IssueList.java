@@ -10,7 +10,6 @@ import configuration.API;
 import configuration.ReportConfiguration;
 import configuration.SonarQubeServer;
 import models.Issue;
-import models.Language;
 
 public class IssueList extends AbstractProvider {
     
@@ -28,10 +27,10 @@ public class IssueList extends AbstractProvider {
     * @param args array of String arrays. [0] status list, [1] severities list, [2] type list
     * @return Issue's list
     */
-    public List<Issue> getIssueList(String[] args) {
+    public ArrayList<Issue> getIssueList(ArrayList<String> args) {
         String str = null;
         try {
-            str = String.format(API.GET_ISSUES.getCall(), SonarQubeServer.getSonarQubeServer().getUrl(), super.projectRequest.getComponentKey(), args[0], args[1], args[2]);
+            str = String.format(API.GET_ISSUES.getCall(), SonarQubeServer.getSonarQubeServer().getUrl(), super.projectRequest.getComponentKey(), args.get(0), args.get(1), args.get(2));
         }catch (Exception e) {
             throw new IllegalStateException("Los argumentos no son validos");
         }

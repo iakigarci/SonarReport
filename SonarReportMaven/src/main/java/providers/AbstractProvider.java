@@ -13,7 +13,15 @@ public abstract class AbstractProvider {
     protected API api;
 
     protected Gson gson = new Gson();
+    
+    protected static final String MEASURES_FIELD = "measures";
+    
+    protected static final String COMPONENT_FIELD = "component";
 
+    protected static final String LANGUAGES_FIELD = "languages";
+
+    protected static final String METRICS_FIELD = "metrics";
+    
 
     public AbstractProvider(ReportConfiguration projectRequest) {
         super();

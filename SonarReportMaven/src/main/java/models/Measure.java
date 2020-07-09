@@ -8,24 +8,29 @@ public class Measure {
     /**
      * key of the metric
      */
-    private String key;
+    private String metric;
     /**
      * Value of the metric
      */
     private String value;
     
-    public Measure(String key, String value) {
+    public Measure(String metric, String value) {
         super();
-        this.key = key;
+        this.metric = metric;
         this.value = value;
     }
 
     public String getKey() {
-        return key;
+        return metric;
     }
 
     public String getValue() {
         return value;
     }
     
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return this.metric + "-" + this.value;
+    }
 }

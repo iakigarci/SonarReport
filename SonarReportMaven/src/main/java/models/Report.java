@@ -28,6 +28,10 @@ public class Report {
     private ArrayList<Language> languageList;
     
     private ArrayList<Issue> issueList;
+    
+    private ArrayList<Metric> metricList;
+    
+    private ArrayList<Measure> measureList;
 
     /**
      * List of components in the project and their metrics
@@ -53,6 +57,8 @@ public class Report {
         str.append("Component Key: " + componentKey + "\n");
         str.append("LanguageList: " + languageList.size()+ " " + languageList.toString() + "\n");
         str.append("IssueList: "+ issueList.size()+ " " + issueList.toString() + "\n");
+        str.append("MetricList: "+ metricList.size()+ " " + metricList.toString() + "\n");
+        str.append("MeasureList: "+ measureList.size()+ " " + measureList.toString() + "\n");
 
         String text = str.toString();
         return text;
@@ -104,6 +110,22 @@ public class Report {
 
     public String getComponentKey() {
         return componentKey;
+    }
+
+    public ArrayList<Metric> getMetricList() {
+        return metricList;
+    }
+
+    public void setMetricList(ArrayList<Metric> metricList) {
+        this.metricList = metricList;
+    }
+
+    public ArrayList<Measure> getMeasureList() {
+        return measureList;
+    }
+
+    public void setMeasureList(ArrayList<Measure> measureList) {
+        this.measureList = measureList;
     }
 
 

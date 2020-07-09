@@ -67,6 +67,10 @@ public class Metric {
         return qualitative;
     }
     
-    
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return this.key;
+    }
 
 }

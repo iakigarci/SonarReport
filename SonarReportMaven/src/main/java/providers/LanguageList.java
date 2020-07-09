@@ -13,7 +13,6 @@ import models.Language;
 public class LanguageList extends AbstractProvider {
 
     private ArrayList<Language> languageList;
-    private static final String LANGUAGES_FIELD = "languages";
 
     public LanguageList(ReportConfiguration projectRequest) {
         super(projectRequest);
