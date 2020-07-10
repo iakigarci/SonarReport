@@ -52,9 +52,9 @@ public class Main {
         projectList.add(arr2);
         
         ArrayList<String> pIssueFilter = new ArrayList<String>() {{
-            add("MINOR");
             add("");
-            add("BUG,CODE_SMELL");
+            add("");
+            add("");
             }
         };
         
