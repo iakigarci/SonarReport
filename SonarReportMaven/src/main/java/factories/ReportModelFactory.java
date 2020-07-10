@@ -38,7 +38,7 @@ public class ReportModelFactory {
 
         report.setLanguageList(languageList.getLanguageList());
         report.setIssueList(issueList.getIssueList(sonarRequest.getIssueFilter()));
-        report.setMetricList(metricList.create());
+        report.setMetricList(metricList.create(sonarRequest.getMetricFilter()));
         measureList.setMetricList(metricList.getIdsAsString());
         report.setMeasureList(measureList.create());
         System.out.println(report.toString());

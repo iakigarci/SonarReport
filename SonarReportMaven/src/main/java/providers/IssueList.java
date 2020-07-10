@@ -24,7 +24,7 @@ public class IssueList extends AbstractProvider {
 
    /**
     * Generates the API calls and returns the issue list with filters
-    * @param args array of String arrays. [0] status list, [1] severities list, [2] type list
+    * @param args array of String arrays. [0] severities list, [1] resolution list, [2] type list
     * @return Issue's list
     */
     public ArrayList<Issue> getIssueList(ArrayList<String> args) {

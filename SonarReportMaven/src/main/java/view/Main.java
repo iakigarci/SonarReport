@@ -52,12 +52,14 @@ public class Main {
         projectList.add(arr2);
         
         ArrayList<String> pIssueFilter = new ArrayList<String>() {{
-            add("aa");
+            add("MINOR");
+            add("");
+            add("BUG,CODE_SMELL");
             }
         };
         
         ArrayList<String> pMetricFilter = new ArrayList<String>() {{
-            add("aa");
+            add("nlock");
             }
         };
         

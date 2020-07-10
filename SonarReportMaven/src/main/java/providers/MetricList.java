@@ -18,7 +18,7 @@ public class MetricList extends AbstractProvider {
         super(projectRequest);
     }
     
-    public ArrayList<Metric> create() {
+    public ArrayList<Metric> create(ArrayList<String> pMetricFilter) {
         String str = String.format(API.GET_METRICS.getCall(), SonarQubeServer.getSonarQubeServer().getUrl());
         final JsonObject jo = request(str);
         metricList = new ArrayList<Metric>(Arrays.asList(getGson().fromJson(jo.get(METRICS_FIELD), Metric[].class)));

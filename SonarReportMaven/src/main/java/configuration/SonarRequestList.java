@@ -39,6 +39,13 @@ public class SonarRequestList {
         return miSonarRequestList;
     }
 
+    /**
+     * 
+     * @param projectList project list with a list of project attributes
+     * @param pIssueFilter  array of String. [0] severities list, [1] resolution list, [2] type list
+     * @param pMetricFilter metric key list
+     * @throws IllegalStateException
+     */
     public void execute(ArrayList<ArrayList<String>> projectList, ArrayList<String> pIssueFilter, ArrayList<String> pMetricFilter) throws IllegalStateException {
         
         ArrayList<ReportConfiguration> pReportConfList = createReportConfigurationList(projectList);
