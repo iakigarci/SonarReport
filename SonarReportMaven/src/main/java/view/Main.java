@@ -3,7 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+import configuration.ExportConfiguration;
 import configuration.SonarRequestList;
 
 
@@ -63,7 +63,9 @@ public class Main {
             }
         };
         
-
+        ExportConfiguration exportConfiguration = new ExportConfiguration(true,"prueba.csv");
+        sonarRList.setExportConfiguration(exportConfiguration);
+        
         sonarRList.execute(projectList, pIssueFilter, pMetricFilter);
     }
 

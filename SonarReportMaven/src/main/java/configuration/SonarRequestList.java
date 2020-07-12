@@ -1,7 +1,9 @@
 package configuration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import factories.ReportFactory;
 import factories.ReportModelFactory;
 import models.Language;
 import models.Report;
@@ -63,6 +65,13 @@ public class SonarRequestList {
             reportModelFactory = new ReportModelFactory(reportConf);
             Report report = reportModelFactory.create();
             reportList.add(report);
+        }
+        
+        ReportFactory reportF = new ReportFactory(exportConfiguration);
+        try {
+            reportF.createFiles(reportList);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
