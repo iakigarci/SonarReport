@@ -15,15 +15,18 @@ import models.Report;
 
 public class CSVExporter extends AbstractExporter {
 
+    
     public CSVExporter(ExportConfiguration exportConfiguration) {
         super(exportConfiguration);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void create(ArrayList<Report> pReportList) throws IOException {
         try {
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get(super.exportConfiguration.getFilePath()));
+            File dir = new File(dirName);
+            dir.mkdir();
+            
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(dirName + "prueba.csv"));
 
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Name", "Author", "Version", "Branch"));
             
