@@ -28,10 +28,17 @@ public class CSVExporter extends AbstractExporter {
             
             BufferedWriter writer = Files.newBufferedWriter(Paths.get(dirName + "prueba.csv"));
 
-            CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Name", "Author", "Version", "Branch"));
+            CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Name", "Author", "Version", "Branch", "ComponentKey", "LanguageList", "MetricList"));
             
             for(Report report : pReportList) {
-                csvPrinter.printRecord(report.getProjectName(), report.getProjectAuthor(), report.getProjectDate(), report.getBranch());
+                csvPrinter.printRecord(report.getProjectName(), 
+                        report.getProjectAuthor(), 
+                        report.getProjectDate(), 
+                        report.getBranch(),
+                        report.getComponentKey(),
+                        report.getLanguageList().toString(),
+                        report.getMetricList().toString()
+                );
             }
             csvPrinter.flush();
         }catch (Exception e) {
