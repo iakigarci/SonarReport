@@ -28,6 +28,7 @@ public class ReportFactory {
         if (exportConfiguration.isEnableCSV()) {
             CSVExporter csvExporter = new CSVExporter(exportConfiguration);
             csvExporter.create(pReportList);
+            csvExporter.createMeasureReport(pReportList);
         }
     }
     
