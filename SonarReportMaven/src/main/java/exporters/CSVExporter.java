@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -84,7 +85,12 @@ public class CSVExporter extends AbstractExporter {
             }
             
             for(Entry<String, ArrayList<String>> entry : issueMap.entrySet()) {
-                csvPrinter.printRecord(entry.getKey(), entry.getValue());
+                ArrayList<String> measures = new ArrayList<String>();
+                measures.add(entry.getKey());
+                for (int i = 0; i < entry.getValue().size(); i++) {
+                    measures.add(entry.getValue().get(i));
+                }
+                csvPrinter.printRecord(measures);
             }
             
             csvPrinter.flush();
