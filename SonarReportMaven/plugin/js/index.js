@@ -1,6 +1,5 @@
-import React from 'react';
-import CnesReportApp from './components/ReportApp';
+import React from "react";
 
-window.registerExtension('sonarReportMaven/global_page', () => {
-    return <ReportApp />
-  });
+window.registerExtension("report_plugin/global_page", options => {
+	  return <ReportApp />;
+	});
