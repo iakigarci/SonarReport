@@ -34,7 +34,7 @@
     },
     
     "scripts": {
-        "build": "node src/main/js/scripts/build.js"
+        "build": "node plugin/config/scripts/build.js"
     },
     "babel": {
         "presets": [

@@ -118,7 +118,17 @@
   <build>
 		<finalName>SonarReportMaven</finalName>
 		<plugins>
-
+			<!-- Plugin and jar creation -->
+			<plugin>
+		        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+		        <artifactId>sonar-packaging-maven-plugin</artifactId>
+		        <version>1.18.0.372</version>
+		        <extensions>true</extensions>
+		        <configuration>
+		          <pluginKey>report_plugin</pluginKey>
+		          <pluginClass>plugin.config.ReportSonarPlugin</pluginClass>
+		        </configuration>
+		    </plugin>
 			<!-- download source code in Eclipse, best practice -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -140,24 +150,41 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-
-			<!-- Make this jar executable -->
+			
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-				  <!-- DO NOT include log4j.properties file in your Jar -->
-				  <excludes>
-					<exclude>**/log4j.properties</exclude>
-				  </excludes>
-				  <archive>
-					<manifest>
-						<!-- Jar file entry point -->
-						<mainClass>src.main.java.view.Main</mainClass>
-					</manifest>
-				  </archive>
-				</configuration>
-			</plugin>
+		        <groupId>com.github.eirslett</groupId>
+		        <artifactId>frontend-maven-plugin</artifactId>
+		        <version>1.6</version>
+		        <executions>
+		          <execution>
+		            <phase>generate-resources</phase>
+		            <id>install node and yarn</id>
+		            <goals>
+		              <goal>install-node-and-yarn</goal>
+		            </goals>
+		            <configuration>
+		              <nodeVersion>v8.5.0</nodeVersion>
+		              <yarnVersion>v1.1.0</yarnVersion>
+		            </configuration>
+		          </execution>
+		          <execution>
+		            <id>yarn install</id>
+		            <goals>
+		              <goal>yarn</goal>
+		            </goals>
+		          </execution>
+		          <execution>
+		            <phase>generate-resources</phase>
+		            <id>yarn run script</id>
+		            <goals>
+		              <goal>yarn</goal>
+		            </goals>
+		            <configuration>
+		              <arguments>run build</arguments>
+		            </configuration>
+		          </execution>
+		        </executions>
+		    </plugin>
 
 		</plugins>
 	</build>
