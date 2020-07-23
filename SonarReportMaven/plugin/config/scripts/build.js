@@ -8,7 +8,7 @@ process.env.NODE_ENV = 'production';
 
 const chalk = require('chalk');
 const webpack = require('webpack');
-const config = require('../conf/webpack.config.prod.js');
+const config = require('../webpack/webpack.config.prod.js');
 
 function formatSize(bytes) {
   if (bytes === 0) {
