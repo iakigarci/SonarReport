@@ -1,8 +1,8 @@
-/*
- * Copyright (C) 2017-2017 SonarSource SA
- * All rights reserved
- * mailto:info AT sonarsource DOT com
+/**
+ * Script taken from https://github.com/SonarSource/sonar-custom-plugin-example
+ * Used to setup the compiler for the Maven build
  */
+
 const webpack = require('webpack');
 const config = require('./webpack.config');
 const getClientEnvironment = require('../env');

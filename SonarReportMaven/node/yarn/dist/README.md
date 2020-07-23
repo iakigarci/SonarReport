@@ -9,10 +9,11 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/yarnpkg/yarn"><img alt="Travis Status" src="https://travis-ci.org/yarnpkg/yarn.svg"></a>
   <a href="https://circleci.com/gh/yarnpkg/yarn"><img alt="Circle Status" src="https://circleci.com/gh/yarnpkg/yarn.svg?style=shield&circle-token=5f0a78473b0f440afb218bf2b82323cc6b3cb43f"></a>
   <a href="https://ci.appveyor.com/project/kittens/yarn/branch/master"><img alt="Appveyor Status" src="https://ci.appveyor.com/api/projects/status/0xdv8chwe2kmk463?svg=true"></a>
+  <a href="https://dev.azure.com/yarnpkg/yarn/_build"><img alt="Azure Pipelines status" src="https://dev.azure.com/yarnpkg/yarn/_apis/build/status/Yarn%20Acceptance%20Tests"></a>
   <a href="https://discord.gg/yarnpkg"><img alt="Discord Chat" src="https://img.shields.io/discord/226791405589233664.svg"></a>
+  <a href="http://commitizen.github.io/cz-cli/"><img alt="Commitizen friendly" src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg"></a>
 </p>
 
 ---
@@ -44,7 +45,7 @@ Read the [Usage Guide](https://yarnpkg.com/en/docs/usage) on our website for det
 
 Contributions are always welcome, no matter how large or small. Substantial feature requests should be proposed as an [RFC](https://github.com/yarnpkg/rfcs). Before contributing, please read the [code of conduct](CODE_OF_CONDUCT.md).
 
-See [Contributing](CONTRIBUTING.md).
+See [Contributing](https://yarnpkg.com/org/contributing/).
 
 ## Prior art
 
@@ -52,7 +53,7 @@ Yarn wouldn't exist if it wasn't for excellent prior art. Yarn has been inspired
 
  - [Bundler](https://github.com/bundler/bundler)
  - [Cargo](https://github.com/rust-lang/cargo)
- - [npm](https://github.com/npm/npm)
+ - [npm](https://github.com/npm/cli)
 
 ## Credits
 

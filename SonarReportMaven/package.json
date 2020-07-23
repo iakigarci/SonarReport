@@ -7,10 +7,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
     "autoprefixer": "6.2.2",
     "babel-core": "6.14.0",
-    "babel-jest": "18.0.0",
-    "babel-loader": "6.2.5",
+    "babel-jest": "^25.1.0",
+    "babel-loader": "^8.0.6",
     "babel-preset-react-app": "0.2.1",
     "cross-env": "2.0.0",
     "cross-spawn": "4.0.0",
@@ -34,7 +38,7 @@
     "react": "15.6.2",
     "react-addons-shallow-compare": "15.6.2",
     "react-addons-test-utils": "15.6.2",
-    "react-dev-utils": "0.2.1",
+    "react-dev-utils": "^10.2.0",
     "react-dom": "15.6.2",
     "react-router": "3.0.2",
     "react-transform-hmr": "1.0.4",
@@ -43,17 +47,22 @@
     "script-loader": "0.6.1",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.0",
-    "webpack": "1.13.2",
+    "webpack": "^4.42.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack-dev-server": "1.16.1"
   },
   "scripts": {
     "build": "node plugin/config/scripts/build.js"
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
+        "presets": [
+            "@babel/env",
+            "@babel/react"
+        ],
+        "plugins": [
+            "@babel/plugin-proposal-class-properties"
+        ]
+    },
   "dependencies": {
     "backbone": "^1.4.0",
     "jquery": "^1.11.0",

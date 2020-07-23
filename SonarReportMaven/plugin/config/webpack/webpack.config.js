@@ -15,11 +15,11 @@ module.exports = {
   output: {
     // The entry point files MUST be shipped inside the final JAR's static/
     // directory.
-    path: path.join(__dirname, "../target/"),
+    path: path.join(__dirname, "../../../target/"),
     filename: "[name].js"
   },
   resolve: {
-    root: path.join(__dirname, "src/main/js")
+    modules: [ path.join(__dirname, "plugin/js") ]
   },
   externals: {
     // React 16.8 ships with SonarQube, and should be re-used to avoid 
@@ -41,14 +41,14 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: "babel-loader",
-        exclude: /(node_modules)/
+        loader: 'babel-loader',
+        exclude: '/node_modules/'
       },
       {
-        test: /\.css/,
-        loader: "style-loader!css-loader!postcss-loader"
-      },
-      { test: /\.json$/, loader: "json" }
-    ]
+          test: /\.css/,
+          loader: "style-loader!css-loader!postcss-loader"
+        },
+        { test: /\.json$/, loader: "json" }
+      ]
   }
 };
