@@ -3,22 +3,29 @@
   <groupId>com.indaba.sonarReport</groupId>
   <artifactId>sonarReportMaven</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
-  <packaging>jar</packaging>
+  <packaging>sonar-plugin</packaging>
 	
+  <name>SonarQube Report</name>
+  <description>Report export for Sonarqube for multiple projects with multiple exportation option.</description>
+  <organization>
+      <name>Indaba</name>
+      <url>http://www.indaba.es/</url>
+  </organization>
+  <issueManagement>
+      <system>GitHub</system>
+      <url>https://github.com/lequal/sonar-cnes-report/issues</url>
+  </issueManagement>
+  
   <properties>
-		<jdk.version>12.0.1</jdk.version>
+		<jdk.version>12</jdk.version>
 		<jodatime.version>2.5</jodatime.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
+		<sonar.sources>src/main/java</sonar.sources>
+		<app.mainClass>view.Main</app.mainClass>
 	</properties>
 	
   <dependencies>
-    <dependency>
-		<groupId>log4j</groupId>
-		<artifactId>log4j</artifactId>
-		<version>${log4j.version}</version>
-    </dependency>
   	<dependency>
 	    <groupId>com.google.code.gson</groupId>
 	    <artifactId>gson</artifactId>
@@ -125,7 +132,7 @@
 		        <version>1.18.0.372</version>
 		        <extensions>true</extensions>
 		        <configuration>
-		          <pluginKey>report_plugin</pluginKey>
+		          <pluginKey>sonarReportMaven</pluginKey>
 		          <pluginClass>plugin.config.ReportSonarPlugin</pluginClass>
 		        </configuration>
 		    </plugin>
@@ -144,12 +151,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.8.0</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 		        <!-- UTF-8 bundles are not supported by Java, so they must be converted during build -->
 		        <groupId>org.codehaus.mojo</groupId>
@@ -163,6 +171,7 @@
 		          </execution>
 		        </executions>
 		    </plugin>
+		    
 			<plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
