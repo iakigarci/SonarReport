@@ -21,7 +21,7 @@
 		<jodatime.version>2.5</jodatime.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-		<sonar.sources>src/main/java</sonar.sources>
+		<sonar.sources>src/main/plugin</sonar.sources>
 		<app.mainClass>view.Main</app.mainClass>
 	</properties>
 	
@@ -133,7 +133,7 @@
 		        <extensions>true</extensions>
 		        <configuration>
 		          <pluginKey>sonarReportMaven</pluginKey>
-		          <pluginClass>plugin.config.ReportSonarPlugin</pluginClass>
+		          <pluginClass>src.main.plugin.config.ReportSonarPlugin</pluginClass>
 		        </configuration>
 		    </plugin>
 			<!-- download source code in Eclipse, best practice -->
