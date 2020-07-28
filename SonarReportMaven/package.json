@@ -52,7 +52,7 @@
     "webpack-dev-server": "1.16.1"
   },
   "scripts": {
-    "build": "node src/main/plugin/config/scripts/build.js"
+    "build": "node src/main/java/plugin/config/scripts/build.js"
   },
   "babel": {
         "presets": [

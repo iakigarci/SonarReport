@@ -10,7 +10,7 @@ module.exports = {
   // defined in src/main/java/org/sonarsource/plugins/example/web/MyPluginPageDefinition.java
   entry: {
     // Using Vanilla JS:
-    global_page: ["./src/main/plugin/js/index.js"]
+    global_page: ["./src/main/java/plugin/js/index.js"]
   },
   output: {
     // The entry point files MUST be shipped inside the final JAR's static/

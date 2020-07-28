@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import factories.ReportFactory;
 import factories.ReportModelFactory;
-import models.Language;
 import models.Report;
 
 public class SonarRequestList {

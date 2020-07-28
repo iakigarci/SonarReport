@@ -21,8 +21,15 @@
 		<jodatime.version>2.5</jodatime.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-		<sonar.sources>src/main/plugin</sonar.sources>
-		<app.mainClass>view.Main</app.mainClass>
+		<sonar.sources>src/main/java</sonar.sources>
+		<app.mainClass>report.configuration.ReportCommandLine</app.mainClass>
+		<sonar.pluginClass>plugin.config.ReportSonarPlugin</sonar.pluginClass>
+		<jdk.min.version>1.8</jdk.min.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <sonar-packaging-maven-plugin.version>1.18.0.372</sonar-packaging-maven-plugin.version>
+        <sonar.skipDependenciesPackaging>true</sonar.skipDependenciesPackaging>
+        <sonar.useChildFirstClassLoader>true</sonar.useChildFirstClassLoader>
 	</properties>
 	
   <dependencies>
@@ -127,15 +134,37 @@
 		<plugins>
 			<!-- Plugin and jar creation -->
 			<plugin>
-		        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
-		        <artifactId>sonar-packaging-maven-plugin</artifactId>
-		        <version>1.18.0.372</version>
-		        <extensions>true</extensions>
-		        <configuration>
-		          <pluginKey>sonarReportMaven</pluginKey>
-		          <pluginClass>src.main.plugin.config.ReportSonarPlugin</pluginClass>
-		        </configuration>
-		    </plugin>
+                <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+                <artifactId>sonar-packaging-maven-plugin</artifactId>
+                <version>1.18.0.372</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <jarName>indaba_report</jarName>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${app.mainClass}</mainClass>
+                                </transformer>
+                            </transformers>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <!--<minimizeJar>true</minimizeJar>-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 			<!-- download source code in Eclipse, best practice -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
