@@ -8,7 +8,7 @@ public class PluginPageDefinition implements PageDefinition {
 
     public void define(Context context) {
           context
-        .addPage(Page.builder("report_plugin/global_page")
+        .addPage(Page.builder("reportindaba/global_page")
           .setName("Global Page")
           .build());
     }

@@ -20,10 +20,6 @@ export default class ReportApp extends React.PureComponent {
   }
 
   render() {
-    if (this.state.loading) {
-      return <div className="page page-limited"><DeferredSpinner /></div>;
-    }
-
     return (
       <div className="page page-limited">
         <h1>asdads</h1>

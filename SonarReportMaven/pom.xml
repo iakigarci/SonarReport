@@ -24,6 +24,7 @@
 		<sonar.sources>src/main/java</sonar.sources>
 		<app.mainClass>report.configuration.ReportCommandLine</app.mainClass>
 		<sonar.pluginClass>config.ReportSonarPlugin</sonar.pluginClass>
+		<sonar.pluginKey>reportindaba</sonar.pluginKey>
 		<jdk.min.version>1.8</jdk.min.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
