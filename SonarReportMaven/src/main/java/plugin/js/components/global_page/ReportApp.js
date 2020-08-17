@@ -12,11 +12,9 @@ export default class ReportApp extends React.PureComponent {
   };
 
   componentDidMount() {
-    loadPage(this.props.project).then(data => {
       this.setState({
         loading: false
       });
-    });
   }
 
   render() {
