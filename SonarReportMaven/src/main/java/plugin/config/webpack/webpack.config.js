@@ -15,11 +15,11 @@ module.exports = {
   output: {
     // The entry point files MUST be shipped inside the final JAR's static/
     // directory.
-    path: path.join(__dirname, "../../../target/"),
+    path: path.join(__dirname, "../../../../../../target/classes/static"),
     filename: "[name].js"
   },
   resolve: {
-    modules: [ path.join(__dirname, "plugin/js") ]
+    modules: [ path.join(__dirname, "src/main/java/plugin/js") ]
   },
   externals: {
     // React 16.8 ships with SonarQube, and should be re-used to avoid 
