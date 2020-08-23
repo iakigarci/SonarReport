@@ -74,7 +74,7 @@ export default class ReportApp extends React.PureComponent {
 	            <div class="page-wrapper-simple">
 	                <div class="page-simple">
 	                    <h1 class="maintenance-title text-center" color="red">INDABA REPORT</h1>
-	                    <form id="generation-form" action="../../api/reportindaba/global_page" method="get">
+	                    <form id="generation-form" action="../../../api/reportindaba/global_page" method="get">
 	                        <div class='forminput'>
 	                            <label for="key" id="keyLabel" class="login-label"><strong>Project key</strong></label>
 	                            <select id="key"

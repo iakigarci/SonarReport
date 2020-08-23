@@ -4,22 +4,18 @@ import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.apache.xmlbeans.XmlException;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.internal.google.gson.Gson;
 import org.sonar.api.server.ws.Request;
 import org.sonar.api.server.ws.RequestHandler;
 import org.sonar.api.server.ws.Response;
 
-import com.google.gson.stream.JsonWriter;
 
 import java.io.File;
 
 
 import configuration.ReportCommandLine;
-import factories.ReportFactory;
 import tools.FileTools;
 import tools.PluginStringManager;
 import tools.ZipFolder;
-import utils.StringManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -83,7 +79,7 @@ public class ExportTask implements RequestHandler {
             FileUtils.copyFile(zip, stream.output());
             Files.deleteIfExists(zip.toPath());
         } catch (Exception e) {
-            Gson gson = new Gson();
+            com.google.gson.Gson gson = new com.google.gson.Gson();
             gson.toJson(PluginStringManager.getProperty("api.tokenerror"));
         }
 
