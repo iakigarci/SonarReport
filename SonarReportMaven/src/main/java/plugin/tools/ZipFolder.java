@@ -1,12 +1,9 @@
 package tools;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -25,6 +22,7 @@ public class ZipFolder {
      */
 
     public static void pack(String sourceDirPath, String zipFilePath) throws IOException {
+        System.out.println(">Starting ZipFolder");
         Path p = Files.createFile(Paths.get(zipFilePath));
         try (ZipOutputStream zs = new ZipOutputStream(Files.newOutputStream(p))) {
             Path pp = Paths.get(sourceDirPath);
@@ -38,8 +36,13 @@ public class ZipFolder {
                       zs.closeEntry();
                 } catch (IOException e) {
                     System.err.println(e);
+                    System.out.println(e);
                 }
               });
+        } catch (Exception e2) {
+            // TODO: handle exception
+            System.out.println("Error: " + e2);
         }
+        System.out.println("<Ending ZipFolder");
     }
 }

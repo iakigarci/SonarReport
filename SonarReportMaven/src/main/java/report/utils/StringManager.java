@@ -52,11 +52,45 @@ public final class StringManager {
     private static ResourceBundle messages;
 
     /** Unique instance of this class (singleton). */
-    private static StringManager ourInstance = null;
+    private static StringManager myStringManager = null;
 
-    //
-    // Static initialization block for reading .properties
-    //
+    static {
+        // store properties
+        properties = new Properties();
+        // read the file
+        InputStream input = null;
+        System.out.println(">Starting: StringManager");
+
+        final ClassLoader classLoader = AbstractProvider.class.getClassLoader();
+
+        try {
+            // load properties file as a stream
+            input = classLoader.getResourceAsStream(StringManager.REPORT_PROPERTIES);
+            if(input!=null) {
+                // load properties from the stream in an adapted structure
+                properties.load(input);
+            }
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            System.out.println("Error StringManager: " + e);
+        } finally {
+            if(input!=null) {
+                try {
+                    // close the stream if necessary (not null)
+                    input.close();
+                } catch (IOException e) {
+                    LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                    System.out.println("Error2 StringManager: " + e);
+                }
+            }
+            System.out.println("<Ending: StringManager");
+            
+        }
+
+        // load internationalized strings, default is defined in the properties file
+        // changeLocale(properties.getProperty(DEFAULT_LANGUAGE));
+        System.out.println("<Ending: StringManager2");
+    }
 
     /**
      * Private constructor to singletonize the class.
@@ -69,10 +103,10 @@ public final class StringManager {
      * @return unique instance of StringManager
      */
     public static synchronized StringManager getInstance() {
-        if (ourInstance == null) {
-            ourInstance = new StringManager();
+        if (myStringManager == null) {
+            myStringManager = new StringManager();
         }
-        return ourInstance;
+        return myStringManager;
     }
 
     /**
@@ -83,7 +117,8 @@ public final class StringManager {
      * @return The value of the property you want as a String.
      */
     public static String getProperty(final String property) {
-        return properties.getProperty(property);
+        String str = properties.getProperty(property);
+        return str;
     }
 
     /**
@@ -105,6 +140,7 @@ public final class StringManager {
      * @param language String containing both the language and country, e.g. en_US
      */
     public static void changeLocale(String language) {
+        System.out.println(language);
         String[] locale = language.split("_");
 
         try {
@@ -112,6 +148,7 @@ public final class StringManager {
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.log(Level.SEVERE,
                     "Unable to change the locale due to malformed command line parameter : " + language, e);
+            System.out.println(e);
         }
     }
 

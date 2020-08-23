@@ -41,7 +41,7 @@ public class ReportModelFactory {
         report.setMetricList(metricList.create(sonarRequest.getMetricFilter()));
         measureList.setMetricList(metricList.getIdsAsString());
         report.setMeasureList(measureList.create());
-        System.out.println(report.toString());
+        // System.out.println(report.toString());
 
         return report;
     }

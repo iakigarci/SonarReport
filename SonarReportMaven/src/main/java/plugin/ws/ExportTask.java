@@ -13,6 +13,7 @@ import java.io.File;
 
 
 import configuration.ReportCommandLine;
+import factories.ReportFactory;
 import tools.FileTools;
 import tools.PluginStringManager;
 import tools.ZipFolder;
@@ -40,7 +41,7 @@ public class ExportTask implements RequestHandler {
      */
     public void handle(Request request, Response response) throws IOException,
             OpenXML4JException, XmlException{
-
+        System.out.println(">Starting ExportTask");
         // Get project key
         String projectKey = request.getParam(PluginStringManager.getProperty("api.report.args.key")).getValue();
 
@@ -55,6 +56,7 @@ public class ExportTask implements RequestHandler {
 
         // Start generation, re-using standalone script
         try {
+            System.out.println("Trying...");
             final Request.StringParam pBranch =
                     request.getParam(PluginStringManager.getProperty("api.report.args.branch"));
             ReportCommandLine.execute(new String[]{
@@ -69,7 +71,8 @@ public class ExportTask implements RequestHandler {
             );
 
             stream.setMediaType("application/zip");
-            String filename = "report.zip";
+            String filename = ReportFactory.formatFilename("zip.report.output", "", projectKey);
+            System.out.println("Filename: " + filename);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + '"');
 
 
@@ -81,8 +84,10 @@ public class ExportTask implements RequestHandler {
         } catch (Exception e) {
             com.google.gson.Gson gson = new com.google.gson.Gson();
             gson.toJson(PluginStringManager.getProperty("api.tokenerror"));
+            System.out.println("Error: ExportTask" + e);
         }
 
         FileTools.deleteFolder(outputDirectory);
+        System.out.println("<Ending ExportTask");
     }
 }

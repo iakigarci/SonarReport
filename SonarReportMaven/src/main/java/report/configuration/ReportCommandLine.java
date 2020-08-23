@@ -73,6 +73,7 @@ public final class ReportCommandLine {
         sonarRList.execute(projectList, pIssueFilter, pMetricFilter);
         
         message = "Report generation: SUCCESS";
+        System.out.println(message);
         LOGGER.info(message);
     }
 

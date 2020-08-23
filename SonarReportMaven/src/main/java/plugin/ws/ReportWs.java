@@ -35,6 +35,7 @@ public class ReportWs implements WebService {
      * @param controller
      */
     private void reportAction(final WebService.NewController controller){
+        System.out.println(">Starting ReportWs");
         // Create API entry point
         final WebService.NewAction report = controller.createAction(PluginStringManager.getProperty("api.report.actionKey"));
         report.setDescription(PluginStringManager.getProperty("api.description"));
@@ -62,5 +63,6 @@ public class ReportWs implements WebService {
         WebService.NewParam branchParam = report.createParam(PluginStringManager.getProperty("api.report.args.branch"));
         branchParam.setDescription(PluginStringManager.getProperty("api.report.args.description.branch"));
         branchParam.setRequired(false);
+        System.out.println("<Ending ReportWs");
     }
 }
