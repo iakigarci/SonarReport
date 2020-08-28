@@ -47,20 +47,19 @@ public class SonarRequestList {
      * @param pMetricFilter metric key list
      * @throws IllegalStateException
      */
-    public void execute(ArrayList<ArrayList<String>> projectList, ArrayList<String> pIssueFilter, ArrayList<String> pMetricFilter) throws IllegalStateException {
+    public void execute(ArrayList<ReportConfiguration> projectList, ArrayList<String> pIssueFilter, ArrayList<String> pMetricFilter) throws IllegalStateException {
         
-        ArrayList<ReportConfiguration> pReportConfList = createReportConfigurationList(projectList);
         issueFilter = pIssueFilter;
         metricFilter = pMetricFilter;
         
         SonarQubeServer.getSonarQubeServer().init("http://localhost:9000", false, 0, 0, 0, 0, false);
-        if (pReportConfList.isEmpty()) {
+        if (projectList.isEmpty()) {
             throw new IllegalStateException("Porfavor, otorga los parametros necesarios");
         }
 
         ReportModelFactory reportModelFactory = new ReportModelFactory();
 
-        for (ReportConfiguration reportConf : pReportConfList) {
+        for (ReportConfiguration reportConf : projectList) {
             reportModelFactory = new ReportModelFactory(reportConf);
             Report report = reportModelFactory.create();
             reportList.add(report);

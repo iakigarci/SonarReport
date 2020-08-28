@@ -1,30 +1,50 @@
 package configuration;
 
+import utils.CommandLineManager;
+import utils.StringManager;
+
 public class ExportConfiguration {
     
     private boolean enableCSV;
     
-    private String filePath;
+    private String output;
 
-
-    public ExportConfiguration(boolean enableCSV, String filePath) {
+    public ExportConfiguration(boolean enableCSV, String output) {
         super();
         this.enableCSV = enableCSV;
-        this.filePath = filePath;
+        this.setOutput(output);
     }
 
+    public ExportConfiguration() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public ExportConfiguration create (String[] pArgs) {
+        final CommandLineManager commandLineManager = new CommandLineManager();
+        commandLineManager.parse(pArgs);
+
+        // Final result to return.
+        final String branch = commandLineManager.getOptionValue("b", StringManager.NO_BRANCH);
+        return new ExportConfiguration(
+                !commandLineManager.hasOption("f"), 
+                commandLineManager.getOptionValue("o", StringManager.getProperty(StringManager.DEFAULT_OUTPUT))
+        );
+    }
+    
     public boolean isEnableCSV() {
         return enableCSV;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public String getOutput() {
+        return output;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setOutput(String output) {
+        this.output = output;
     }
-    
+
+
+
     
 
 }

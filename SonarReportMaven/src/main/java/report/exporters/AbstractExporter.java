@@ -10,12 +10,18 @@ public abstract class AbstractExporter {
 
     protected ExportConfiguration exportConfiguration;
     
-    protected final static String dirName = System.getProperty("user.dir") + "\\report_out\\";
-    
+
     public AbstractExporter(ExportConfiguration exportConfiguration) {
         super();
         this.exportConfiguration = exportConfiguration;
     }
 
     public abstract void create(ArrayList<Report> pReportList) throws IOException;
+
+    public void create(ArrayList<Report> pReportList, String dirName) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    
 }

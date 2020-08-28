@@ -25,7 +25,7 @@ public class CSVExporter extends AbstractExporter {
     }
 
     @Override
-    public void create(ArrayList<Report> pReportList) throws IOException {
+    public void create(ArrayList<Report> pReportList, String dirName) throws IOException {
         try {
             File dir = new File(dirName);
             dir.mkdir();
@@ -51,7 +51,7 @@ public class CSVExporter extends AbstractExporter {
 
     }
     
-    public void createMeasureReport(ArrayList<Report> pReportList) {
+    public void createMeasureReport(ArrayList<Report> pReportList, String dirName) {
         try {
             ArrayList<String> headers = new ArrayList<String>();
             headers.add("Metric");
@@ -104,6 +104,12 @@ public class CSVExporter extends AbstractExporter {
         if (valueList != null) {
             valueList.add(measure.getValue());
         }
+    }
+
+    @Override
+    public void create(ArrayList<Report> pReportList) throws IOException {
+        // TODO Auto-generated method stub
+        
     }
     
 }

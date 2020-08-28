@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import models.Report;
+
 /**
  * Main entry point
  */
@@ -25,11 +27,11 @@ public final class ReportCommandLine {
      * Entry point of the program.
      * @param args Arguments that will be preprocessed.
      */
-    public static void main(final String[] args)  {
+    public static void main(String[] reportList, String[] exportList)  {
         // main catches all exceptions
         try {
             // We use different method because it can be called outside main (for example, in from ReportSonarPlugin)
-            execute(args);
+            execute(reportList, exportList);
 
         } catch (Exception e) {
             // it logs all the stack trace
@@ -38,22 +40,16 @@ public final class ReportCommandLine {
         }
     }
 
-    public static void execute(final String[] args){
-        // Log message.
-        String message;
-        LOGGER.info("ARGS:" + args);
-
-        // Parse command line arguments.
+    public static void execute( String[] reportList, String[] exportList){
+        
+        ReportConfiguration reportConf = new ReportConfiguration();
+        reportConf.create(reportList);
+        
+        ExportConfiguration exportConf = new ExportConfiguration();
+        
         SonarRequestList sonarRList = SonarRequestList.getSonarRequestList();
-        ArrayList<ArrayList<String>> projectList = new ArrayList<ArrayList<String>>();
-        ArrayList<String> arr1 = new ArrayList<String>();
-        ArrayList<String> arr2 = new ArrayList<String>();
-        String[] conf = new String[] {"noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:darkchess"};
-        String[] conf2 = new String[] {"noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:darkchess:src/main/java/com/c0nrad/darkchess/engine/FogEngine.java"};
-        Collections.addAll(arr1, conf);
-        Collections.addAll(arr2, conf2);
-        projectList.add(arr1);
-        projectList.add(arr2);
+        sonarRList.setExportConfiguration(exportConf);
+        
         
         ArrayList<String> pIssueFilter = new ArrayList<String>() {{
             add("");
@@ -66,13 +62,11 @@ public final class ReportCommandLine {
             add("nlock");
             }
         };
+        ArrayList<ReportConfiguration> l = new ArrayList<ReportConfiguration>();
+        l.add(reportConf);
+        sonarRList.execute(l, pIssueFilter, pMetricFilter);
         
-        ExportConfiguration exportConfiguration = new ExportConfiguration(true,"prueba.csv");
-        sonarRList.setExportConfiguration(exportConfiguration);
-        
-        sonarRList.execute(projectList, pIssueFilter, pMetricFilter);
-        
-        message = "Report generation: SUCCESS";
+        String message = "Report generation: SUCCESS";
         System.out.println(message);
         LOGGER.info(message);
     }

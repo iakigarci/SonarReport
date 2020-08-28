@@ -1,5 +1,10 @@
 package configuration;
 
+import java.text.SimpleDateFormat;
+
+import utils.CommandLineManager;
+import utils.StringManager;
+
 public class ReportConfiguration {
 
     private String token;
@@ -17,6 +22,24 @@ public class ReportConfiguration {
         this.author = author;
         this.version = version;
         this.componentKey = key;
+    }
+    
+    public ReportConfiguration() {}
+    
+    public ReportConfiguration create (String[] pArgs) {
+        final CommandLineManager commandLineManager = new CommandLineManager();
+        commandLineManager.parse(pArgs);
+
+        // Final result to return.
+        final String branch = commandLineManager.getOptionValue("b", StringManager.NO_BRANCH);
+        return new ReportConfiguration(
+                commandLineManager.getOptionValue("t", StringManager.getProperty(StringManager.SONAR_TOKEN)),
+                commandLineManager.getOptionValue("p", StringManager.EMPTY),
+                branch.isEmpty()?StringManager.NO_BRANCH:branch,
+                commandLineManager.getOptionValue("a", StringManager.getProperty(StringManager.DEFAULT_AUTHOR)),
+                commandLineManager.getOptionValue("v", StringManager.getProperty(StringManager.DEFAULT_AUTHOR)),
+                commandLineManager.getOptionValue("k", StringManager.getProperty(StringManager.DEFAULT_AUTHOR))
+        );
     }
 
     public String getToken() {

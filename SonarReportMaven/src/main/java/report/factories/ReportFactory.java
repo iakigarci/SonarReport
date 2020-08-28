@@ -47,10 +47,12 @@ public class ReportFactory {
     }
     
     public void createFiles(ArrayList<Report> pReportList) throws IOException {
+        
         if (exportConfiguration.isEnableCSV()) {
             CSVExporter csvExporter = new CSVExporter(exportConfiguration);
-            csvExporter.create(pReportList);
-            csvExporter.createMeasureReport(pReportList);
+            String fileName = formatFilename(CSV_FILENAME, exportConfiguration.getOutput(), pReportList.get(0).getProjectName());
+            csvExporter.create(pReportList, fileName);
+            csvExporter.createMeasureReport(pReportList, fileName);
         }
     }
 

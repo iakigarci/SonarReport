@@ -1,0 +1,36 @@
+// Log message.
+        String message;
+        LOGGER.info("ARGS:" + args);
+
+        // Parse command line arguments.
+        SonarRequestList sonarRList = SonarRequestList.getSonarRequestList();
+        ArrayList<ArrayList<String>> projectList = new ArrayList<ArrayList<String>>();
+        ArrayList<String> arr1 = new ArrayList<String>();
+        ArrayList<String> arr2 = new ArrayList<String>();
+        String[] conf = new String[] {"noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:darkchess"};
+        String[] conf2 = new String[] {"noauth", "darkchess", "master", "iaki", "1.0.3-SNAPSHOT", "com.c0nrad.darkchess:darkchess:src/main/java/com/c0nrad/darkchess/engine/FogEngine.java"};
+        Collections.addAll(arr1, conf);
+        Collections.addAll(arr2, conf2);
+        projectList.add(arr1);
+        projectList.add(arr2);
+        
+        ArrayList<String> pIssueFilter = new ArrayList<String>() {{
+            add("");
+            add("");
+            add("");
+            }
+        };
+        
+        ArrayList<String> pMetricFilter = new ArrayList<String>() {{
+            add("nlock");
+            }
+        };
+        
+        ExportConfiguration exportConfiguration = new ExportConfiguration(true,"prueba.csv");
+        sonarRList.setExportConfiguration(exportConfiguration);
+        
+        sonarRList.execute(projectList, pIssueFilter, pMetricFilter);
+        
+        message = "Report generation: SUCCESS";
+        System.out.println(message);
+        LOGGER.info(message);

@@ -17,6 +17,7 @@ import factories.ReportFactory;
 import tools.FileTools;
 import tools.PluginStringManager;
 import tools.ZipFolder;
+import utils.StringManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -60,15 +61,17 @@ public class ExportTask implements RequestHandler {
             final Request.StringParam pBranch =
                     request.getParam(PluginStringManager.getProperty("api.report.args.branch"));
             ReportCommandLine.execute(new String[]{
-                    "report"
-//                    "-o", outputDirectory.getAbsolutePath(),
-//                    "-s", config.get("sonar.core.serverBaseURL").orElse(PluginStringManager.getProperty("plugin.defaultHost")),
-//                    "-p", projectKey,
-//                    "-b", pBranch.isPresent()?pBranch.getValue(): StringManager.NO_BRANCH,
-//                    "-a", request.getParam(PluginStringManager.getProperty("api.report.args.author")).getValue(),
-//                    "-t", request.getParam(PluginStringManager.getProperty("api.report.args.token")).getValue()
-            }
-            );
+                    "-t", request.getParam(PluginStringManager.getProperty("api.report.args.token")).getValue(),
+                    "-p", projectKey,
+                    "-b", pBranch.isPresent()?pBranch.getValue(): StringManager.NO_BRANCH,
+                    "-a", request.getParam(PluginStringManager.getProperty("api.report.args.author")).getValue(),
+                    "-v", "1.0.3-SNAPSHOT",
+                    "-k", request.getParam(PluginStringManager.getProperty("api.report.args.description.key")).getValue(),
+                    },new String[]{
+                    "report",
+                    "-o", outputDirectory.getAbsolutePath(),
+                    "-s", config.get("sonar.core.serverBaseURL").orElse(PluginStringManager.getProperty("plugin.defaultHost")),
+                    });
 
             stream.setMediaType("application/zip");
             String filename = ReportFactory.formatFilename("zip.report.output", "", projectKey);
