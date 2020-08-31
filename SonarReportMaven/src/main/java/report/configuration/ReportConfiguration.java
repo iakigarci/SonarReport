@@ -22,6 +22,7 @@ public class ReportConfiguration {
         this.author = author;
         this.version = version;
         this.componentKey = key;
+        System.out.println(token + project + branch + author + version + componentKey);
     }
     
     public ReportConfiguration() {}
@@ -37,8 +38,8 @@ public class ReportConfiguration {
                 commandLineManager.getOptionValue("p", StringManager.EMPTY),
                 branch.isEmpty()?StringManager.NO_BRANCH:branch,
                 commandLineManager.getOptionValue("a", StringManager.getProperty(StringManager.DEFAULT_AUTHOR)),
-                commandLineManager.getOptionValue("v", StringManager.getProperty(StringManager.DEFAULT_AUTHOR)),
-                commandLineManager.getOptionValue("k", StringManager.getProperty(StringManager.DEFAULT_AUTHOR))
+                commandLineManager.getOptionValue("v", StringManager.EMPTY),
+                commandLineManager.getOptionValue("k", StringManager.EMPTY)
         );
     }
 

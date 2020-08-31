@@ -43,12 +43,16 @@ public final class ReportCommandLine {
     public static void execute( String[] reportList, String[] exportList){
         
         ReportConfiguration reportConf = new ReportConfiguration();
-        reportConf.create(reportList);
+        reportConf = reportConf.create(reportList);
+        System.out.println("ReportConfiguration completed");
         
         ExportConfiguration exportConf = new ExportConfiguration();
-        
+        exportConf.create(exportList);
+        System.out.println("ExportConfiguration completed");
+
         SonarRequestList sonarRList = SonarRequestList.getSonarRequestList();
         sonarRList.setExportConfiguration(exportConf);
+        
         
         
         ArrayList<String> pIssueFilter = new ArrayList<String>() {{

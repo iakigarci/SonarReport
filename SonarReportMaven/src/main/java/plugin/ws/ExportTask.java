@@ -45,7 +45,6 @@ public class ExportTask implements RequestHandler {
         System.out.println(">Starting ExportTask");
         // Get project key
         String projectKey = request.getParam(PluginStringManager.getProperty("api.report.args.key")).getValue();
-
         // Getting stream and change headers
         Response.Stream stream = response.stream();
 
@@ -66,11 +65,9 @@ public class ExportTask implements RequestHandler {
                     "-b", pBranch.isPresent()?pBranch.getValue(): StringManager.NO_BRANCH,
                     "-a", request.getParam(PluginStringManager.getProperty("api.report.args.author")).getValue(),
                     "-v", "1.0.3-SNAPSHOT",
-                    "-k", request.getParam(PluginStringManager.getProperty("api.report.args.description.key")).getValue(),
+                    "-k", projectKey
                     },new String[]{
-                    "report",
                     "-o", outputDirectory.getAbsolutePath(),
-                    "-s", config.get("sonar.core.serverBaseURL").orElse(PluginStringManager.getProperty("plugin.defaultHost")),
                     });
 
             stream.setMediaType("application/zip");

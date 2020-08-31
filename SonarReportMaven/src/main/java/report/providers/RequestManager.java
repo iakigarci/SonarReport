@@ -163,7 +163,7 @@ public final class RequestManager {
             System.out.println("Impossible to reach SonarQube instance.");
         }
 
-        // Throws exception with advice to cnesreport user
+        // Throws exception with advice user
         switch (response.code()) {
             case 401:
                 System.out.println(

@@ -23,8 +23,6 @@ public class ExportConfiguration {
         final CommandLineManager commandLineManager = new CommandLineManager();
         commandLineManager.parse(pArgs);
 
-        // Final result to return.
-        final String branch = commandLineManager.getOptionValue("b", StringManager.NO_BRANCH);
         return new ExportConfiguration(
                 !commandLineManager.hasOption("f"), 
                 commandLineManager.getOptionValue("o", StringManager.getProperty(StringManager.DEFAULT_OUTPUT))

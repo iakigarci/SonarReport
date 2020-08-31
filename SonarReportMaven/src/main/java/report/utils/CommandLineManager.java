@@ -95,19 +95,20 @@ public class CommandLineManager {
     public void parse(final String[] pArgs) {
 
         // Contains true if options are reliable
-        boolean areOptionsCorrect = false;
+        boolean areOptionsCorrect = true;
 
         try {
             // Parse the command line.
             commandLine = parser.parse(options, pArgs);
-            areOptionsCorrect = checkOptionsUse(commandLine);
+             // areOptionsCorrect = checkOptionsUse(commandLine);
         } catch (ParseException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-	    areOptionsCorrect = false;
+            areOptionsCorrect = false;
+            System.out.println("Error CommandLine: " + e);
         }
 
         // If help option is present we print it.
         if (!areOptionsCorrect) {
+            System.out.println("Incorrect");
             printHelp();
             throw new IllegalArgumentException("Illegal command line arguments");
         } else if (commandLine.hasOption("h")) {
@@ -119,7 +120,7 @@ public class CommandLineManager {
     private void printHelp() {
         helpFormatter.printHelp(128, "java -jar cnesreport.jar",
                 "Generate editable reports for SonarQube projects.\n\n", options,
-                "\n\nPlease report issues at https://github.com/lequal/sonar-cnes-report/issues", true);
+                "\n\nPlease report issues", true);
     }
 
     /**
