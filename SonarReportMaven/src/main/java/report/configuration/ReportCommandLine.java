@@ -47,7 +47,7 @@ public final class ReportCommandLine {
         System.out.println("ReportConfiguration completed");
         
         ExportConfiguration exportConf = new ExportConfiguration();
-        exportConf.create(exportList);
+        exportConf = exportConf.create(exportList);
         System.out.println("ExportConfiguration completed");
 
         SonarRequestList sonarRList = SonarRequestList.getSonarRequestList();

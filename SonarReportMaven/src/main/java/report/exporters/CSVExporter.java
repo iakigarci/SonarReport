@@ -27,13 +27,14 @@ public class CSVExporter extends AbstractExporter {
     @Override
     public void create(ArrayList<Report> pReportList, String dirName) throws IOException {
         try {
+            System.out.println(dirName);
             File dir = new File(dirName);
             dir.mkdir();
             
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get(dirName + "report.csv"));
-
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(dirName));
+            System.out.println(" writer");
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Name", "Author", "Version", "Branch", "ComponentKey", "LanguageList", "MetricList"));
-            
+            System.out.println("csvPrint");
             for(Report report : pReportList) {
                 csvPrinter.printRecord(report.getProjectName(), 
                         report.getProjectAuthor(), 
@@ -59,7 +60,7 @@ public class CSVExporter extends AbstractExporter {
                 headers.add("Measure_"+i);
             }
             
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get(dirName + "issueReport.csv"));
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(dirName ));
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
             
             csvPrinter.printRecord(headers);

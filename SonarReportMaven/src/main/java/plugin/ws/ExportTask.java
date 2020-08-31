@@ -72,7 +72,6 @@ public class ExportTask implements RequestHandler {
 
             stream.setMediaType("application/zip");
             String filename = ReportFactory.formatFilename("zip.report.output", "", projectKey);
-            System.out.println("Filename: " + filename);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + '"');
 
 

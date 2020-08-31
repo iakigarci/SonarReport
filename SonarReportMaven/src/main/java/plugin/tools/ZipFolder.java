@@ -35,13 +35,12 @@ public class ZipFolder {
                       Files.copy(path, zs);
                       zs.closeEntry();
                 } catch (IOException e) {
-                    System.err.println(e);
-                    System.out.println(e);
+                    System.err.println("Error: ZipFolder " + e);
                 }
               });
-        } catch (Exception e2) {
+        } catch (Exception e2) { 
             // TODO: handle exception
-            System.out.println("Error: " + e2);
+            System.out.println("Error: ZipFolder2 " + e2);
         }
         System.out.println("<Ending ZipFolder");
     }

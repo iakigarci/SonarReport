@@ -52,7 +52,7 @@ public class ReportFactory {
             CSVExporter csvExporter = new CSVExporter(exportConfiguration);
             String fileName = formatFilename(CSV_FILENAME, exportConfiguration.getOutput(), pReportList.get(0).getProjectName());
             csvExporter.create(pReportList, fileName);
-            csvExporter.createMeasureReport(pReportList, fileName);
+            //csvExporter.createMeasureReport(pReportList, fileName);
         }
     }
 
