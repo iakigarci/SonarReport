@@ -22,10 +22,14 @@ public class ZipFolder {
      */
 
     public static void pack(String sourceDirPath, String zipFilePath) throws IOException {
+        sourceDirPath = "C:\\sonarqube-8.4.1.35646\\temp\\indaba";
+        zipFilePath = "C:\\sonarqube-8.4.1.35646\\temp\\indaba.zip";
         System.out.println(">Starting ZipFolder");
         Path p = Files.createFile(Paths.get(zipFilePath));
         try (ZipOutputStream zs = new ZipOutputStream(Files.newOutputStream(p))) {
+            
             Path pp = Paths.get(sourceDirPath);
+            System.out.println("Trying zip ...");
             Files.walk(pp)
               .filter(path -> !Files.isDirectory(path))
               .forEach(path -> {

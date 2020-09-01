@@ -74,10 +74,10 @@ public class ExportTask implements RequestHandler {
             String filename = ReportFactory.formatFilename("zip.report.output", "", projectKey);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + '"');
 
-
+            System.out.println(outputDirectory.getAbsolutePath());
             // generate zip output and send it
             ZipFolder.pack(outputDirectory.getAbsolutePath(), outputDirectory.getAbsolutePath() + ".zip");
-            File zip = new File(outputDirectory.getAbsolutePath() + ".zip");
+            File zip = new File("C:\\sonarqube-8.4.1.35646\\temp\\indaba" + ".zip");
             FileUtils.copyFile(zip, stream.output());
             Files.deleteIfExists(zip.toPath());
         } catch (Exception e) {

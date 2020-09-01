@@ -1,5 +1,6 @@
 package exporters;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,13 +16,6 @@ public abstract class AbstractExporter {
         super();
         this.exportConfiguration = exportConfiguration;
     }
-
-    public abstract void create(ArrayList<Report> pReportList) throws IOException;
-
-    public void create(ArrayList<Report> pReportList, String dirName) throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
-
+    public abstract File create(ArrayList<Report> pReportList, String path) throws IOException;
     
 }

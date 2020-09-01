@@ -1,7 +1,9 @@
 package exporters;
 
+import java.awt.List;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,16 +27,36 @@ public class CSVExporter extends AbstractExporter {
     }
 
     @Override
-    public void create(ArrayList<Report> pReportList, String dirName) throws IOException {
+    public File create(ArrayList<Report> pReportList, String path) throws IOException {
+//        File file = null;
+//        try {
+//            final String filePath = exportConfiguration.getOutput()+"\\"+pReportList.get(0).getProjectName();
+//            final Report report = pReportList.get(0);
+//            // Opening file
+//            file = new File(filePath);
+//            System.out.println(filePath);
+//            file.mkdir();
+//            FileWriter outputfile = new FileWriter(file);
+//            
+//            try(CSVPrinter csvPrinter = new CSVPrinter(outputfile, CSVFormat.EXCEL.withDelimiter('\t'))){
+//                String line = "a";
+//                csvPrinter.printRecord(line);
+//            } catch (Exception e) {
+//                // TODO: handle exception
+//                System.out.println(e);
+//            }
+//        }catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return file;
+        File dir = null;
         try {
-            System.out.println(dirName);
-            File dir = new File(dirName);
+            path = "C:\\sonarqube-8.4.1.35646\\temp\\indaba";
+            dir = new File(path);
             dir.mkdir();
             
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get(dirName));
-            System.out.println(" writer");
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(path + "\\report.csv"));
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Name", "Author", "Version", "Branch", "ComponentKey", "LanguageList", "MetricList"));
-            System.out.println("csvPrint");
             for(Report report : pReportList) {
                 csvPrinter.printRecord(report.getProjectName(), 
                         report.getProjectAuthor(), 
@@ -47,9 +69,9 @@ public class CSVExporter extends AbstractExporter {
             }
             csvPrinter.flush();
         }catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error ZipFolder :" + e);
         }
-
+        return dir;
     }
     
     public void createMeasureReport(ArrayList<Report> pReportList, String dirName) {
@@ -107,10 +129,5 @@ public class CSVExporter extends AbstractExporter {
         }
     }
 
-    @Override
-    public void create(ArrayList<Report> pReportList) throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
     
 }
