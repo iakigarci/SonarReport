@@ -9,10 +9,12 @@ export default class ReportApp extends React.PureComponent {
 
 	state = {
 	        loading: true,
-	        projects: [],
-	        token: "",
-	        author: "",
-	        branches: [],
+	        projects: [
+	        	{name: "" },
+	        	{token: "" },
+	        	{author: "" },
+		        {branches: [] }
+	        ],
 	        isActive: false,
 	        value: 'random'
 	    };
@@ -33,7 +35,13 @@ export default class ReportApp extends React.PureComponent {
 	            this.setState({ branches: branches });
 	        });
 	    };
-
+	    
+	    handleAddProject = () => {
+	        this.setState({
+	        	projects: this.state.shareholders.concat([{ name: "" }])
+	        });
+	      };
+	      
 	    componentDidMount() {
 	        initiatePluginToken().then(tokenInfo => {
 	            getProjectsList().then(projects => {
@@ -84,35 +92,38 @@ export default class ReportApp extends React.PureComponent {
 	                <div class="page-simple">
 	                    <h1 class="maintenance-title text-center" color="red">INDABA REPORTE</h1>
 	                    <form id="generation-form" action="../../../api/reportindaba/global_page" method="get">
-	                        <div class='forminput'>
-	                            <label for="key" id="keyLabel" class="login-label"><strong>Project key</strong></label>
-	                            <select id="key"
-	                                name="key"
-	                                class="login-input"
-	                                onChange={this.onChangeProject} required>
-	                                {projectsList}
-	                            </select>
-	                        </div>
-	                        <div class='forminput'>
-	                            <label for="branch" id="branchLabel" class="login-label"><strong>Branch key</strong></label>
-	                            <select id="branch"
-	                                name="branch"
-	                                class="login-input" required>
-	                                {branchesList}
-	                            </select>
-	                        </div>
-	                        <div class='forminput'>
-	                            <label for="author" id="authorLabel" class="login-label"><strong>Author</strong></label>
-	                            <input type="text"
-	                                id="author"
-	                                name="author"
-	                                class="login-input"
-	                                maxlength="255"
-	                                required
-	                                placeholder="Report's author" value={this.state.author}
-	                                onChange={this.onChangeAuthor} />
-	                            <input type="hidden" name="token" id="token_cnesreport" defaultValue={this.state.token} />
-	                        </div>
+	                    	<div class='projectCard'>
+		                        <div class='forminput'>
+		                            <label for="key" id="keyLabel" class="login-label"><strong>Project key</strong></label>
+		                            <select id="key"
+		                                name="key"
+		                                class="login-input"
+		                                onChange={this.onChangeProject} required>
+		                                {projectsList}
+		                            </select>
+		                        </div>
+		                        <div class='forminput'>
+		                            <label for="branch" id="branchLabel" class="login-label"><strong>Branch key</strong></label>
+		                            <select id="branch"
+		                                name="branch"
+		                                class="login-input" required>
+		                                {branchesList}
+		                            </select>
+		                        </div>
+		                        <div class='forminput'>
+		                            <label for="author" id="authorLabel" class="login-label"><strong>Author</strong></label>
+		                            <input type="text"
+		                                id="author"
+		                                name="author"
+		                                class="login-input"
+		                                maxlength="255"
+		                                required
+		                                placeholder="Report's author" value={this.state.author}
+		                                onChange={this.onChangeAuthor} />
+		                            <input type="hidden" name="token" id="token_cnesreport" defaultValue={this.state.token} />
+		                        </div>
+		                    </div>
+		                    <button type="button" onClick={this.handleAddProject}>Add</button>
 	                        <button type="button" onClick={this.handleShow}>Show</button>
 	                        {this.state.isActive ? <div> 
 	                        	<input readOnly value={this.state.value} />
