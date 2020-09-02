@@ -22,7 +22,6 @@ public class ReportConfiguration {
         this.author = author;
         this.version = version;
         this.componentKey = key;
-        System.out.println(token + project + branch + author + version + componentKey);
     }
     
     public ReportConfiguration() {}

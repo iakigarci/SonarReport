@@ -13,7 +13,7 @@ public class ExportConfiguration {
         super();
         this.enableCSV = enableCSV;
         this.setOutput(output);
-        System.out.println(enableCSV + output);
+        System.out.println("Output exportConf: " + output);
     }
 
     public ExportConfiguration() {

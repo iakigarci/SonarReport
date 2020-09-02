@@ -49,10 +49,9 @@ public class ExportTask implements RequestHandler {
         Response.Stream stream = response.stream();
 
         // Get a temp folder
-        final File outputDirectory = File.createTempFile("reportindaba", Long.toString(System.nanoTime()));
-
+        String outputDirectory = System.getProperty("user.dir") + "\\temp\\reportindaba\\";
+        System.out.println(outputDirectory);
         // Last line create file instead of folder, we delete file to put folder at the same place later
-        Files.delete(outputDirectory.toPath());
 
         // Start generation, re-using standalone script
         try {
@@ -67,17 +66,17 @@ public class ExportTask implements RequestHandler {
                     "-v", "1.0.3-SNAPSHOT",
                     "-k", projectKey
                     },new String[]{
-                    "-o", outputDirectory.getAbsolutePath(),
+                    "-o", outputDirectory
                     });
 
             stream.setMediaType("application/zip");
             String filename = ReportFactory.formatFilename("zip.report.output", "", projectKey);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + '"');
 
-            System.out.println(outputDirectory.getAbsolutePath());
             // generate zip output and send it
-            ZipFolder.pack(outputDirectory.getAbsolutePath(), outputDirectory.getAbsolutePath() + ".zip");
-            File zip = new File("C:\\sonarqube-8.4.1.35646\\temp\\indaba" + ".zip");
+            String zipPath = System.getProperty("user.dir") + "\\temp\\reportindaba" + ".zip";
+            ZipFolder.pack(outputDirectory, zipPath);
+            File zip = new File(zipPath);
             FileUtils.copyFile(zip, stream.output());
             Files.deleteIfExists(zip.toPath());
         } catch (Exception e) {
@@ -86,7 +85,6 @@ public class ExportTask implements RequestHandler {
             System.out.println("Error: ExportTask" + e);
         }
 
-        FileTools.deleteFolder(outputDirectory);
         System.out.println("<Ending ExportTask");
     }
 }

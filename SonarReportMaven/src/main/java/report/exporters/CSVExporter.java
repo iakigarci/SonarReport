@@ -15,6 +15,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
 import configuration.ExportConfiguration;
+import configuration.ReportConfiguration;
 import models.Measure;
 import models.Report;
 
@@ -27,7 +28,7 @@ public class CSVExporter extends AbstractExporter {
     }
 
     @Override
-    public File create(ArrayList<Report> pReportList, String path) throws IOException {
+    public File create(ArrayList<Report> pReportList, String fileName) throws IOException {
 //        File file = null;
 //        try {
 //            final String filePath = exportConfiguration.getOutput()+"\\"+pReportList.get(0).getProjectName();
@@ -51,10 +52,12 @@ public class CSVExporter extends AbstractExporter {
 //        return file;
         File dir = null;
         try {
+            String path = super.exportConfiguration.getOutput();
             dir = new File(path);
             dir.mkdir();
             
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get(path + "\\report.csv"));
+            System.out.println("Filename: " + fileName);
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName));
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Name", "Author", "Version", "Branch", "ComponentKey", "LanguageList", "MetricList"));
             for(Report report : pReportList) {
                 csvPrinter.printRecord(report.getProjectName(), 
