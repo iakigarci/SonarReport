@@ -12,7 +12,16 @@ export default class ReportApp extends React.PureComponent {
 	        projects: [],
 	        token: "",
 	        author: "",
-	        branches: []
+	        branches: [],
+	        isActive: false,
+	        value: 'random'
+	    };
+	
+		handleShow = ()=>{
+		      this.setState({
+		          isActive: true,
+		          value: "Un proyecto"
+		      })
 	    };
 
 	    onChangeAuthor = (event) => {
@@ -73,7 +82,7 @@ export default class ReportApp extends React.PureComponent {
 	        return (
 	            <div class="page-wrapper-simple">
 	                <div class="page-simple">
-	                    <h1 class="maintenance-title text-center" color="red">INDABA REPORT</h1>
+	                    <h1 class="maintenance-title text-center" color="red">INDABA REPORTE</h1>
 	                    <form id="generation-form" action="../../../api/reportindaba/global_page" method="get">
 	                        <div class='forminput'>
 	                            <label for="key" id="keyLabel" class="login-label"><strong>Project key</strong></label>
@@ -104,10 +113,15 @@ export default class ReportApp extends React.PureComponent {
 	                                onChange={this.onChangeAuthor} />
 	                            <input type="hidden" name="token" id="token_cnesreport" defaultValue={this.state.token} />
 	                        </div>
-	                        <br />
-	                        <input id="generation" name="generation" type="submit" value="Generar" /><br />
-	                        <em class="info-message">This operation may take some time, please wait while the report is being generated.</em>
+	                        <button type="button" onClick={this.handleShow}>Show</button>
+	                        {this.state.isActive ? <div> 
+	                        	<input readOnly value={this.state.value} />
+		                        <input id="generation" name="generation" type="submit" value="Generar" /><br />
+		                        <em class="info-message">This operation may take some time, please wait while the report is being generated.</em>
+	                        </div>
+	                        : null }
 	                    </form>
+	                    
 	                </div>
 	            </div>
 	        );

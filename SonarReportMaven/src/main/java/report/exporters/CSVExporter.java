@@ -51,7 +51,6 @@ public class CSVExporter extends AbstractExporter {
 //        return file;
         File dir = null;
         try {
-            path = "C:\\sonarqube-8.4.1.35646\\temp\\indaba";
             dir = new File(path);
             dir.mkdir();
             
