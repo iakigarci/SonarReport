@@ -9,12 +9,11 @@ export default class ReportApp extends React.PureComponent {
 
 	state = {
 	        loading: true,
-	        projects: [
-	        	{name: "" },
-	        	{token: "" },
-	        	{author: "" },
-		        {branches: [] }
-	        ],
+	        projects: [],
+        	tokens: [] ,
+        	authors: [] ,
+	        branches: [] ,
+	        index: 0,
 	        isActive: false,
 	        value: 'random'
 	    };
@@ -27,7 +26,10 @@ export default class ReportApp extends React.PureComponent {
 	    };
 
 	    onChangeAuthor = (event) => {
-	        this.setState({ author: event.target.value })
+	        this.setState({ projects: [
+	        	.
+	        	] {event.target.value })
+	        }
 	    };
 
 	    onChangeProject = (event) => {
