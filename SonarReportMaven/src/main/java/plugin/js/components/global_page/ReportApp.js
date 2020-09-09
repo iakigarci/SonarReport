@@ -15,21 +15,18 @@ export default class ReportApp extends React.PureComponent {
 	        branches: [] ,
 	        index: 0,
 	        isActive: false,
-	        value: 'random'
+	        values: []
 	    };
 	
-		handleShow = ()=>{
+		handleShow = () => {
 		      this.setState({
 		          isActive: true,
-		          value: "Un proyecto"
-		      })
+		          values: "Un proyecto"
+		      });
 	    };
 
 	    onChangeAuthor = (event) => {
-	        this.setState({ projects: [
-	        	.
-	        	] {event.target.value })
-	        }
+	        this.setState({ author: event.target.value })
 	    };
 
 	    onChangeProject = (event) => {
@@ -43,6 +40,12 @@ export default class ReportApp extends React.PureComponent {
 	        	projects: this.state.shareholders.concat([{ name: "" }])
 	        });
 	      };
+	      
+        handleChange(event) {
+        	alert("HandleEvent");
+    	    this.setState({values: this.state.values.concat(event.target.value)});
+    	    alert(this.state.values);
+    	  }
 	      
 	    componentDidMount() {
 	        initiatePluginToken().then(tokenInfo => {
@@ -68,7 +71,7 @@ export default class ReportApp extends React.PureComponent {
 	                }
 	            });
 	        });
-	    }
+	    };
 
 	    render() {
 	        if (this.state.loading) {
@@ -123,7 +126,8 @@ export default class ReportApp extends React.PureComponent {
 		                                placeholder="Report's author" value={this.state.author}
 		                                onChange={this.onChangeAuthor} />
 		                            <input type="hidden" name="token" id="token_cnesreport" defaultValue={this.state.token} />
-		                        </div>
+		                            <input type="text" value={this.state.values} onChange={this.handleChange} />
+		                            </div>
 		                    </div>
 		                    <button type="button" onClick={this.handleAddProject}>Add</button>
 	                        <button type="button" onClick={this.handleShow}>Show</button>
