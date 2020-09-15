@@ -1,20 +1,10 @@
 package configuration;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import models.Report;
-
 /**
  * Main entry point
  */
 public final class ReportCommandLine {
-
-
-    /** Logger of this class */
-    private static final Logger LOGGER = Logger.getLogger(ReportCommandLine.class.getName());
 
     /**
      * Private constructor to not be able to instantiate it.
@@ -22,36 +12,40 @@ public final class ReportCommandLine {
     private ReportCommandLine(){}
 
     /**
-     * Main method.
-     * See help message for more information about using this program.
-     * Entry point of the program.
-     * @param args Arguments that will be preprocessed.
+     * Main method of report branch. This method has to be called to start the report task
+     * @param   reportList  array of arrays with the projects list, with their configuration parameters
+     * @param   exportList  list of export configuration parameter
      */
-    public static void main(String[] reportList, String[] exportList)  {
+    public static void main(String[][] reportList, String[] exportList)  {
         // main catches all exceptions
         try {
-            // We use different method because it can be called outside main (for example, in from ReportSonarPlugin)
+            // We use different method because it can be called outside main 
             execute(reportList, exportList);
 
         } catch (Exception e) {
             // it logs all the stack trace
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            System.out.println("Error in main " + e);
             System.exit(-1);
         }
     }
 
-    public static void execute( String[] reportList, String[] exportList){
+    public static void execute( String[][] reportList, String[] exportList){
         
-        ReportConfiguration reportConf = new ReportConfiguration();
-        reportConf = reportConf.create(reportList);
+        ReportConfiguration reportConf;
+        ArrayList<ReportConfiguration> reportConfList = new ArrayList<ReportConfiguration>();
+        
+        for (int i = 0; i < reportList.length; i++) {
+            reportConf = new ReportConfiguration();
+            reportConf = reportConf.create(reportList[i]);
+            reportConfList.add(reportConf);
+        }
         
         ExportConfiguration exportConf = new ExportConfiguration();
         exportConf = exportConf.create(exportList);
-
         SonarRequestList sonarRList = SonarRequestList.getSonarRequestList();
         sonarRList.setExportConfiguration(exportConf);
         
-        
+        // TODO: These filters have to be parameterized
         ArrayList<String> pIssueFilter = new ArrayList<String>() {{
             add("");
             add("");
@@ -63,13 +57,9 @@ public final class ReportCommandLine {
             add("nlock");
             }
         };
-        ArrayList<ReportConfiguration> l = new ArrayList<ReportConfiguration>();
-        l.add(reportConf);
-        sonarRList.execute(l, pIssueFilter, pMetricFilter);
-        
-        String message = "Report generation: SUCCESS";
-        System.out.println(message);
-        LOGGER.info(message);
+
+        sonarRList.execute(reportConfList, pIssueFilter, pMetricFilter);
+        System.out.println("Report generation: SUCCESS");
     }
 
 }

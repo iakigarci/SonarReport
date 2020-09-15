@@ -3,10 +3,20 @@ package configuration;
 import utils.CommandLineManager;
 import utils.StringManager;
 
+/**
+ * 
+ * @author GARCI
+ * Handles the export configuration of the report
+ */
 public class ExportConfiguration {
     
+    /**
+     * Enable CSV export
+     */
     private boolean enableCSV;
-    
+    /**
+     * Output path of the export files
+     */
     private String output;
 
     public ExportConfiguration(boolean enableCSV, String output) {
@@ -20,6 +30,14 @@ public class ExportConfiguration {
         // TODO Auto-generated constructor stub
     }
 
+    /**
+     * Creates a ExportConfiguration instance with the given parameters. 
+     * 
+     * @param   pArgs argument list 
+     *  f   enableCSV
+     *  o   output
+     * @return      ExportConfiguration instance   
+     */
     public ExportConfiguration create (String[] pArgs) {
         final CommandLineManager commandLineManager = new CommandLineManager();
         commandLineManager.parse(pArgs);

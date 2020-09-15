@@ -7,8 +7,16 @@ import java.util.ArrayList;
 import configuration.ExportConfiguration;
 import models.Report;
 
+/**
+ * 
+ * @author GARCI
+ * Abstract class to create different export methods
+ */
 public abstract class AbstractExporter {
 
+    /**
+     * Export settings
+     */
     protected ExportConfiguration exportConfiguration;
     
 
@@ -16,6 +24,14 @@ public abstract class AbstractExporter {
         super();
         this.exportConfiguration = exportConfiguration;
     }
+    
+    /**
+     * Create a File from a report list, and export to a path
+     * @param   pReportList list of generated reports
+     * @param   path    file output
+     * @return  generated file
+     * @throws IOException
+     */
     public abstract File create(ArrayList<Report> pReportList, String path) throws IOException;
     
 }

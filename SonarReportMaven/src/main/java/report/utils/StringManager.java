@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import providers.AbstractProvider;
 
@@ -42,8 +40,6 @@ public final class StringManager {
     /** Default name for the author. */
     public static final String DEFAULT_AUTHOR = "report.author";
 
-    /** Logger for StringManager. */
-    private static final Logger LOGGER = Logger.getLogger(StringManager.class.getCanonicalName());
 
     /** Contain all the properties related to the report. */
     private static Properties properties;
@@ -59,8 +55,6 @@ public final class StringManager {
         properties = new Properties();
         // read the file
         InputStream input = null;
-        System.out.println(">Starting: StringManager");
-
         final ClassLoader classLoader = AbstractProvider.class.getClassLoader();
 
         try {
@@ -71,7 +65,6 @@ public final class StringManager {
                 properties.load(input);
             }
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
             System.out.println("Error StringManager: " + e);
         } finally {
             if(input!=null) {
@@ -79,17 +72,10 @@ public final class StringManager {
                     // close the stream if necessary (not null)
                     input.close();
                 } catch (IOException e) {
-                    LOGGER.log(Level.SEVERE, e.getMessage(), e);
-                    System.out.println("Error2 StringManager: " + e);
+                    System.out.println("Error StringManager (2): " + e);
                 }
             }
-            System.out.println("<Ending: StringManager");
-            
         }
-
-        // load internationalized strings, default is defined in the properties file
-        // changeLocale(properties.getProperty(DEFAULT_LANGUAGE));
-        System.out.println("<Ending: StringManager2");
     }
 
     /**
@@ -146,8 +132,8 @@ public final class StringManager {
         try {
             changeLocale(locale[0], locale[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            LOGGER.log(Level.SEVERE,
-                    "Unable to change the locale due to malformed command line parameter : " + language, e);
+            System.out.println(
+                    "Unable to change the locale due to malformed command line parameter : " + language +  e);
             System.out.println(e);
         }
     }

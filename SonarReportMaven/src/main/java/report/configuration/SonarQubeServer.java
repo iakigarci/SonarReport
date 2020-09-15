@@ -13,7 +13,7 @@ public class SonarQubeServer {
     private int versionRevision;
     /** Number for build version **/
     private int versionBuild;
-    /** True if cnesreport support this SonarQube version **/
+    /** True if the plugin support this SonarQube version **/
     private boolean supported;
 
     private static SonarQubeServer miSonarQubeServer;

@@ -2,7 +2,13 @@ package models;
 
 public class Language {
 
+    /**
+     * Language key
+     */
     private String key;
+    /**
+     * Language name
+     */
     private String name;
 
     public Language(String key, String name) {

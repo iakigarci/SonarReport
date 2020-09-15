@@ -11,8 +11,15 @@ import exporters.CSVExporter;
 import models.Report;
 import utils.StringManager;
 
+/**
+ * Factory to create different export methods
+ * @author GARCI
+ *
+ */
 public class ReportFactory {
-    /** Property for the word report filename. */
+    /** 
+     * Property for the word report filename.
+     * */
     private static final String REPORT_FILENAME = "report.output";
     /** Property for the CSV report filename. */
     private static final String CSV_FILENAME = "csv.output";
@@ -46,16 +53,29 @@ public class ReportFactory {
         this.exportConfiguration = exportConfiguration;
     }
     
+    /**
+     * Create different files with selected filter
+     * 
+     * @param pReportList   a list of export methods
+     * @throws IOException
+     */
     public void createFiles(ArrayList<Report> pReportList) throws IOException {
-        
+        //TODO Have to add a if for each new export method
         if (exportConfiguration.isEnableCSV()) {
             CSVExporter csvExporter = new CSVExporter(exportConfiguration);
             String fileName = formatFilename(CSV_FILENAME, exportConfiguration.getOutput(), pReportList.get(0).getProjectName());
             csvExporter.create(pReportList, fileName);
-            //csvExporter.createMeasureReport(pReportList, fileName);
         }
     }
 
+    /**
+     * Build a filename with given parameters following a format
+     * 
+     * @param propertyName  name of the main field
+     * @param baseDir   direction
+     * @param projectName   sonarqube project name
+     * @return  formated filename
+     */
     public static String formatFilename(final String propertyName, final String baseDir, final String projectName) {
         // construct the filename by replacing date and name
         return StringManager.getProperty(propertyName)

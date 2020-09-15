@@ -42,7 +42,6 @@ public class ExportTask implements RequestHandler {
      */
     public void handle(Request request, Response response) throws IOException,
             OpenXML4JException, XmlException{
-        System.out.println(">Starting ExportTask");
         // Get project key
         String projectKey = request.getParam(PluginStringManager.getProperty("api.report.args.key")).getValue();
         // Getting stream and change headers
@@ -55,17 +54,19 @@ public class ExportTask implements RequestHandler {
 
         // Start generation, re-using standalone script
         try {
-            System.out.println("Trying...");
-            final Request.StringParam pBranch =
-                    request.getParam(PluginStringManager.getProperty("api.report.args.branch"));
-            ReportCommandLine.execute(new String[]{
+            final Request.StringParam pBranch = request.getParam(PluginStringManager.getProperty("api.report.args.branch"));
+            String[] projectArray = new String[]{
                     "-t", request.getParam(PluginStringManager.getProperty("api.report.args.token")).getValue(),
                     "-p", projectKey,
                     "-b", pBranch.isPresent()?pBranch.getValue(): StringManager.NO_BRANCH,
                     "-a", request.getParam(PluginStringManager.getProperty("api.report.args.author")).getValue(),
                     "-v", "1.0.3-SNAPSHOT",
-                    "-k", projectKey
-                    },new String[]{
+                    "-k", projectKey };
+            String[][] projectArrays = new String[][] { projectArray };
+            
+            ReportCommandLine.execute(
+                    projectArrays
+                    ,new String[]{
                     "-o", outputDirectory
                     });
 

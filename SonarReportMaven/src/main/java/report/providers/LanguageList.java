@@ -5,13 +5,20 @@ import java.util.Arrays;
 
 import com.google.gson.JsonObject;
 
-import configuration.API;
 import configuration.ReportConfiguration;
 import configuration.SonarQubeServer;
 import models.Language;
 
+/**
+ * 
+ * @author GARCI
+ * Project associated language list
+ */
 public class LanguageList extends AbstractProvider {
 
+    /**
+     * Language list
+     */
     private ArrayList<Language> languageList;
 
     public LanguageList(ReportConfiguration projectRequest) {
@@ -21,7 +28,8 @@ public class LanguageList extends AbstractProvider {
     }
 
     public ArrayList<Language> getLanguageList() {
-        String str = String.format(API.GET_LANGUAGES.getCall(), SonarQubeServer.getSonarQubeServer().getUrl());
+        String str2 = api.getRequest("GET_LANGUAGES");
+        String str = String.format(str2, SonarQubeServer.getSonarQubeServer().getUrl());
         final JsonObject jo = request(str);
         languageList = new ArrayList<Language>(Arrays.asList(getGson().fromJson(jo.get(LANGUAGES_FIELD), Language[].class)));
 

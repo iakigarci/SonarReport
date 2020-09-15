@@ -1,6 +1,5 @@
 package configuration;
 
-import java.text.SimpleDateFormat;
 
 import utils.CommandLineManager;
 import utils.StringManager;
@@ -26,6 +25,18 @@ public class ReportConfiguration {
     
     public ReportConfiguration() {}
     
+    /**
+     * Creates a ReportConfiguration instance with the given parameters. 
+     * 
+     * @param   pArgs :
+     *  t   token
+     *  p   project
+     *  b   branch
+     *  k   key
+     *  v   version
+     *  
+     * @return  ReportConfiguration instance
+     */
     public ReportConfiguration create (String[] pArgs) {
         final CommandLineManager commandLineManager = new CommandLineManager();
         commandLineManager.parse(pArgs);

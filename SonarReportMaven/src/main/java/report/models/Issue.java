@@ -12,65 +12,53 @@ public class Issue {
      * Severity of the corresponding rule
      */
     private String severity;
-
     /**
      *  Issue's key in Sonarqube
      */
     private String key;
-
     /**
      *  Associated metric
      */
     private String metric;
-    
     /**
      *  Associated component
      */
     private String component;
-    
     /** Associated project
      * 
      */
     private String project;
-    
     /** Line of the issue
      * 
      */
     private String line;
-    
     /**
      * Issue's status. 
      * Possible values: INFO, MINOR, MAJOR, CRITICAL, BLOCKER
      */
     private String status;
-    
     /**
      * Issue's resolution
      * Possible values: FALSE-POSITIVE, WONTFIX, FIXED, REMOVED
      */
     private String resolution;
-    
     /**
      *  Issue's effort;
      */
     private String effort;
-    
     /**
      * Issue's type
      * Possible values: CODE_SMELL, BUG, VULNERABILITY, SECURITY_HOTSPOT
      */
     private String type;
-    
     /**
      * Issue's message
      */
     private String message;
-    
     /**
      * Issue's programming language
      */
     private String language;
-    
     /**
      * Issue's associated comments
      */

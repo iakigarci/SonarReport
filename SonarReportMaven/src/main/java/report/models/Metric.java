@@ -6,28 +6,23 @@ public class Metric {
      * Represents the sonarqube's key of the metric
      */
     private String key;
-    
     /**
      * The metric's rule
      */
     private String name;
-    
     /**
      * The metric's type 
      * Possible values: INT, FLOAT, PERCENT, BOOL
      */
     private String type;
-    
     /**
      * Short description of the metric
      */
     private String description;
-    
     /**
      * Represents metric domain
      */
     private String domain;
-
     /**
      * The status of the metric
      */

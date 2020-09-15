@@ -1,9 +1,7 @@
 package exporters;
 
-import java.awt.List;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,12 +13,19 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
 import configuration.ExportConfiguration;
-import configuration.ReportConfiguration;
 import models.Measure;
 import models.Report;
 
+/**
+ * 
+ * @author GARCI
+ * Exports a csv file with data from a report list
+ */
 public class CSVExporter extends AbstractExporter {
 
+    /**
+     * Map  String: metric key  ArrayList: issue value
+     */
     private HashMap<String, ArrayList<String>> issueMap = new HashMap<String, ArrayList<String>>(); 
     
     public CSVExporter(ExportConfiguration exportConfiguration) {

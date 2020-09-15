@@ -5,17 +5,29 @@ package models;
  */
 public class Comment {
 
-    // Comment's key
+    /**
+     * Comment's key
+     */
     private String key;
-    // Comment's author login.
+    /** 
+     * Comment's author login.
+     */
     private String login;
-    // Comment's text.
+    /**
+     * Comment's text.
+     */
     private String text;
-    // Comment's markdown text.
+    /**
+     * Comment's markdown text.
+     */
     private String markdown;
-    // Comment's updatable status.
+    /**
+     * Comment's updatable status.
+     */
     private boolean updatable;
-    // Comment's creation date.
+    /**
+     * Comment's creation date.
+     */
     private String createdAt;
 
     public Comment(String key, String login, String text, String markdown, boolean updatable, String createdAt) {

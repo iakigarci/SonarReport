@@ -6,15 +6,21 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
-import configuration.API;
 import configuration.ReportConfiguration;
 import configuration.SonarQubeServer;
 import models.Issue;
 
+/**
+ * 
+ * @author GARCI
+ * Project associated issue list
+ */
 public class IssueList extends AbstractProvider {
     
     private static final String ISSUE_FIELD = "issues";
-    
+    /**
+     * Issue list
+     */
     private ArrayList<Issue> issueList;
     
     public IssueList(ReportConfiguration projectRequest) {
@@ -23,14 +29,15 @@ public class IssueList extends AbstractProvider {
     }
 
    /**
-    * Generates the API calls and returns the issue list with filters
-    * @param args array of String arrays. [0] severities list, [1] resolution list, [2] type list
-    * @return Issue's list
+    * Make the call to the API and creates the Issue list with the response
+    * 
+    * @param    args    array of String arrays. [0] severities list, [1] resolution list, [2] type list
+    * @return   issue's list
     */
     public ArrayList<Issue> getIssueList(ArrayList<String> args) {
         String str = null;
         try {
-            str = String.format(API.GET_ISSUES.getCall(), SonarQubeServer.getSonarQubeServer().getUrl(), super.projectRequest.getComponentKey(), args.get(0), args.get(1), args.get(2));
+            str = String.format(api.getRequest("GET_ISSUES"), SonarQubeServer.getSonarQubeServer().getUrl(), super.projectRequest.getComponentKey(), args.get(0), args.get(1), args.get(2));
         }catch (Exception e) {
             throw new IllegalStateException("Los argumentos no son validos");
         }

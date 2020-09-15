@@ -1,7 +1,6 @@
 package factories;
 
 
-import configuration.ExportConfiguration;
 import configuration.ReportConfiguration;
 import configuration.SonarRequestList;
 import models.Report;
@@ -12,12 +11,15 @@ import providers.MetricList;
 
 public class ReportModelFactory {
 
+    /**
+     * ReportConfiguration instance
+     */
     private ReportConfiguration reportConf;
-    
-
+    /**
+     * Generated report
+     */
     private Report report;
     
-
 
     public ReportModelFactory(ReportConfiguration reportConf) {
         super();
@@ -26,7 +28,11 @@ public class ReportModelFactory {
 
     public ReportModelFactory() {}
 
-
+    /**
+     * Creates the report instance, initializing all the providers
+     * 
+     * @return  Gemerated report
+     */
     public Report create() {
         SonarRequestList sonarRequest = SonarRequestList.getSonarRequestList();
         ProviderFactory providerF = new ProviderFactory(reportConf);
@@ -34,7 +40,7 @@ public class ReportModelFactory {
         IssueList issueList = providerF.create(IssueList.class);
         MetricList metricList = providerF.create(MetricList.class);
         MeasureList measureList = providerF.create(MeasureList.class);
-        report = new Report("darkchess", reportConf.getAuthor(), reportConf.getVersion(), reportConf.getBranch(), reportConf.getComponentKey());
+        report = new Report(reportConf);
 
         report.setLanguageList(languageList.getLanguageList());
         report.setIssueList(issueList.getIssueList(sonarRequest.getIssueFilter()));

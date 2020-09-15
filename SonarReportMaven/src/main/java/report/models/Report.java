@@ -2,8 +2,9 @@ package models;
 
 import java.util.ArrayList;
 
-public class Report {
+import configuration.ReportConfiguration;
 
+public class Report {
     /**
      * Name of the project/report
      */
@@ -25,12 +26,21 @@ public class Report {
      */
     private String componentKey;
     
+    /**
+     * Language list
+     */
     private ArrayList<Language> languageList;
-    
+    /**
+     * Issue list
+     */
     private ArrayList<Issue> issueList;
-    
+    /**
+     * Metric list
+     */
     private ArrayList<Metric> metricList;
-    
+    /**
+     * Measure list
+     */
     private ArrayList<Measure> measureList;
 
     /**
@@ -44,6 +54,15 @@ public class Report {
         this.projectDate = projectDate;
         this.branch = branch;
         this.componentKey = componentKey;
+    }
+    
+    public Report(ReportConfiguration pReportConf) {
+        super();
+        this.projectName = pReportConf.getProject();
+        this.projectAuthor = pReportConf.getAuthor();
+        this.projectDate = pReportConf.getVersion();
+        this.branch = pReportConf.getBranch();
+        this.componentKey = pReportConf.getComponentKey();
     }
 
     @Override

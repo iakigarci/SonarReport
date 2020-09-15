@@ -11,22 +11,18 @@ public class Component {
      * ID in SonarQube
      */
     private String id;
-    
     /**
      * Filename
      */
     private String name;
-    
     /**
      * Path to the file
      */
     private String path;
-    
     /**
      * Component type
      */
     private String qualifier;
-    
     /**
      * List of metrics and their values the current file
      */

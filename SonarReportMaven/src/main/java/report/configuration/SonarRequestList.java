@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import factories.ReportFactory;
 import factories.ReportModelFactory;
 import models.Report;
+import tools.PluginStringManager;
+import utils.StringManager;
 
 public class SonarRequestList {
 
@@ -52,9 +54,9 @@ public class SonarRequestList {
         issueFilter = pIssueFilter;
         metricFilter = pMetricFilter;
         
-        SonarQubeServer.getSonarQubeServer().init("http://localhost:9000", false, 0, 0, 0, 0, false);
+        SonarQubeServer.getSonarQubeServer().init(StringManager.getProperty("sonar.url"), false, 0, Integer.parseInt(PluginStringManager.getProperty("plugin.since")), 0, 0, true);
         if (projectList.isEmpty()) {
-            throw new IllegalStateException("Porfavor, otorga los parametros necesarios");
+            throw new IllegalStateException("Please, give the correct parameters.");
         }
 
         ReportModelFactory reportModelFactory = new ReportModelFactory();
