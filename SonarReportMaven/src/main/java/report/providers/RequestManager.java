@@ -114,13 +114,15 @@ public final class RequestManager {
      * Execute a get http request
      * 
      * @param url server to request
-     * @param token token to authenticate to SonarQube
      * @return response as string
      * @throws SonarQubeException When SonarQube server is not callable.
      * @throws BadSonarQubeRequestException if SonarQube Server sent an error
      */
-    public String get(final String url, final String token) {
+    public String get(final String url) {
         // Initialize connexion information.
+        if (url == null) {
+            throw new NullPointerException("URl parameter is null or empty");
+        }
         final String baseUrl = extractBaseUrl(url);
         final String path = url.replace(baseUrl, "");
         final String proxyHost = System.getProperty(STR_PROXY_HOST, StringManager.EMPTY);
@@ -163,18 +165,23 @@ public final class RequestManager {
             System.out.println("Impossible to reach SonarQube instance.");
         }
 
-        // Throws exception with advice user
+        if (response == null) {
+            throw new NullPointerException("API Response is null");
+        }
         switch (response.code()) {
             case 401:
                 System.out.println(
                         "Unauthorized error sent by SonarQube server (code 401), please provide a valid authentication token to cnesreport.");
+                break;
             case 403:
                 System.out.println(
                         "Insufficient privileges error sent by SonarQube server (code 403), please check your permissions in SonarQube configuration.");
+                break;
             case 404:
                 System.out.println(String.format(
                         "Not found error sent by SonarQube server (code 404, URL %s, Error %s), please check cnesreport compatibility with your SonarQube server version.",
                         response.requestUrl(), response.content()));
+                break;
             default:
                 break;
         }

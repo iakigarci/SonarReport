@@ -40,9 +40,6 @@ public class ReportConfiguration {
     public ReportConfiguration create (String[] pArgs) {
         final CommandLineManager commandLineManager = new CommandLineManager();
         commandLineManager.parse(pArgs);
-
-        // Final result to return.
-        final String branch = commandLineManager.getOptionValue("b", StringManager.NO_BRANCH);
         return new ReportConfiguration(
                 commandLineManager.getOptionValue("t", StringManager.getProperty(StringManager.SONAR_TOKEN)),
                 commandLineManager.getOptionValue("p", StringManager.EMPTY),

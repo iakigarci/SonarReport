@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A directory or file of a Sonar project
@@ -28,12 +29,12 @@ public class Component {
      */
     private ArrayList<Measure> measures;
 
-    public Component(String id, String name, String path, ArrayList<Measure> measures, String qualifier) {
+    public Component(String id, String name, String path, List<Measure> measures, String qualifier) {
         super();
         this.id = id;
         this.name = name;
         this.path = path;
-        this.measures = measures;
+        this.measures = (ArrayList<Measure>) measures;
         this.qualifier = qualifier;
     }
 
@@ -49,7 +50,7 @@ public class Component {
         return path;
     }
 
-    public ArrayList<Measure> getMeasures() {
+    public List<Measure> getMeasures() {
         return measures;
     }
 

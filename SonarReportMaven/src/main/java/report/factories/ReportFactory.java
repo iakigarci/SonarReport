@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 
 import configuration.ExportConfiguration;
@@ -17,6 +18,7 @@ import utils.StringManager;
  *
  */
 public class ReportFactory {
+    // TODO: add more export methods to use this fields
     /** 
      * Property for the word report filename.
      * */
@@ -27,10 +29,6 @@ public class ReportFactory {
     private static final String MD_FILENAME = "markdown.output";
     /** Property for the excel report filename. */
     private static final String ISSUES_FILENAME = "issues.output";
-    /** Pattern for the name of the directory containing configuration files. */
-    private static final String CONF_FOLDER_PATTERN = "%s/conf";
-    /** Error message returned when the program cannot create a folder because it already exists. */
-    private static final String CNES_MKDIR_ERROR = "Impossible to create the following directory: %s";
     /** Placeholder for the base directory of reporting. */
     private static final String BASEDIR = "BASEDIR";
     /** Placeholder for the date of reporting. */
@@ -59,7 +57,7 @@ public class ReportFactory {
      * @param pReportList   a list of export methods
      * @throws IOException
      */
-    public void createFiles(ArrayList<Report> pReportList) throws IOException {
+    public void createFiles(List<Report> pReportList) throws IOException {
         //TODO Have to add a if for each new export method
         if (exportConfiguration.isEnableCSV()) {
             CSVExporter csvExporter = new CSVExporter(exportConfiguration);

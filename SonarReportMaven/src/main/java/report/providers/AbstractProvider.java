@@ -66,10 +66,6 @@ public abstract class AbstractProvider {
         try {
             json = getGson().fromJson(raw, JsonElement.class);
         } catch (Exception e) {
-            // log exception's message
-            // LOGGER.log(Level.SEVERE, e.getMessage(), e);
-            // throw new BadSonarQubeRequestException("Server answered: " + raw +
-            // StringManager.SPACE + e.getMessage());
             e.printStackTrace();
             System.out.println("a");
             json = null;
@@ -83,9 +79,6 @@ public abstract class AbstractProvider {
             System.out.println(
                     "Empty server response, reason might be : " + "server certificate not in JRE/JDK truststore, ...");
         }
-
-        // verify if an error occurred
-
         return jsonObject;
     }
 
@@ -103,7 +96,7 @@ public abstract class AbstractProvider {
         preparedRequest = preparedRequest.replaceAll("\\+", "%2B");
 
         // launch the request on SonarQube server and retrieve resources into a string
-        return RequestManager.getInstance().get(preparedRequest, projectRequest.getToken());
+        return RequestManager.getInstance().get(preparedRequest);
     }
 
     public ReportConfiguration getProjectRequest() {

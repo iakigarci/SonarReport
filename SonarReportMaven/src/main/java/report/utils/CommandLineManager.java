@@ -71,20 +71,16 @@ public class CommandLineManager {
      * @param pArgs Arguments to parse.
      */
     public void parse(final String[] pArgs) {
-
         // Contains true if options are reliable
         boolean areOptionsCorrect = true;
 
         try {
             // Parse the command line.
             commandLine = parser.parse(options, pArgs);
-             // areOptionsCorrect = checkOptionsUse(commandLine);
         } catch (ParseException e) {
             areOptionsCorrect = false;
             System.out.println("Error CommandLine: " + e);
         }
-
-        // If help option is present we print it.
         if (!areOptionsCorrect) {
             System.out.println("Incorrect");
             printHelp();

@@ -2,6 +2,7 @@ package providers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.google.gson.JsonObject;
 
@@ -19,28 +20,25 @@ public class LanguageList extends AbstractProvider {
     /**
      * Language list
      */
-    private ArrayList<Language> languageList;
+    private ArrayList<Language> languageL;
 
     public LanguageList(ReportConfiguration projectRequest) {
         super(projectRequest);
-        languageList = new ArrayList<Language>();
-        // TODO Auto-generated constructor stub
+        languageL = new ArrayList<>();
     }
 
-    public ArrayList<Language> getLanguageList() {
-        String str2 = api.getRequest("GET_LANGUAGES");
-        String str = String.format(str2, SonarQubeServer.getSonarQubeServer().getUrl());
+    public List<Language> getLanguageList() {
+        String str = String.format(api.getRequest("GET_LANGUAGES"), SonarQubeServer.getSonarQubeServer().getUrl());
         final JsonObject jo = request(str);
-        languageList = new ArrayList<Language>(Arrays.asList(getGson().fromJson(jo.get(LANGUAGES_FIELD), Language[].class)));
+        languageL = new ArrayList<>(Arrays.asList(getGson().fromJson(jo.get(LANGUAGES_FIELD), Language[].class)));
 
-        return languageList;
+        return languageL;
     }
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         String str = ("Lista de lenguages: ");
-        for (Language language : languageList) {
+        for (Language language : languageL) {
             str = str + language.getName();
         }
         return str;

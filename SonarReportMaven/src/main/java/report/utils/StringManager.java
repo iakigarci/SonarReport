@@ -103,8 +103,7 @@ public final class StringManager {
      * @return The value of the property you want as a String.
      */
     public static String getProperty(final String property) {
-        String str = properties.getProperty(property);
-        return str;
+        return properties.getProperty(property);
     }
 
     /**

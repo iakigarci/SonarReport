@@ -14,7 +14,6 @@ import java.io.File;
 
 import configuration.ReportCommandLine;
 import factories.ReportFactory;
-import tools.FileTools;
 import tools.PluginStringManager;
 import tools.ZipFolder;
 import utils.StringManager;

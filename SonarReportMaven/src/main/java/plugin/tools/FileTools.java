@@ -3,7 +3,6 @@ package tools;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.logging.Logger;
 
 public class FileTools {
 
@@ -28,16 +27,14 @@ public class FileTools {
                 try {
                     Files.deleteIfExists(toDelete.toPath());
                 } catch (IOException e) {
-                    Logger LOGGER = Logger.getLogger(FileTools.class.getName());
-                    LOGGER.warning(e.getMessage());
+                    System.out.println("FileTools error:" + e); 
                 }
             }
         }
         try {
             Files.deleteIfExists(folder.toPath());
         } catch (IOException e) {
-            Logger LOGGER = Logger.getLogger(FileTools.class.getName());
-            LOGGER.warning(e.getMessage());
+            System.out.println("FileTools error (2):" + e);
         }
     }
 }

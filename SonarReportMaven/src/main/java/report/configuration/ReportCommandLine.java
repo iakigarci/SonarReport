@@ -32,7 +32,7 @@ public final class ReportCommandLine {
     public static void execute( String[][] reportList, String[] exportList){
         
         ReportConfiguration reportConf;
-        ArrayList<ReportConfiguration> reportConfList = new ArrayList<ReportConfiguration>();
+        ArrayList<ReportConfiguration> reportConfList = new ArrayList<>();
         
         for (int i = 0; i < reportList.length; i++) {
             reportConf = new ReportConfiguration();

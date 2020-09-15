@@ -2,6 +2,7 @@ package providers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.google.gson.JsonObject;
 
@@ -14,7 +15,7 @@ public class MetricList extends AbstractProvider {
     /**
      * Metric list
      */
-    private ArrayList<Metric> metricList;
+    private ArrayList<Metric> metricL;
     
     public MetricList(ReportConfiguration projectRequest) {
         super(projectRequest);
@@ -26,12 +27,12 @@ public class MetricList extends AbstractProvider {
      * @param   pMetricFilter 
      * @return  metric list
      */
-    public ArrayList<Metric> create(ArrayList<String> pMetricFilter) {
+    public List<Metric> create(ArrayList<String> pMetricFilter) {
         String str = String.format(api.getRequest("GET_METRICS"), SonarQubeServer.getSonarQubeServer().getUrl());
         final JsonObject jo = request(str);
-        metricList = new ArrayList<Metric>(Arrays.asList(getGson().fromJson(jo.get(METRICS_FIELD), Metric[].class)));
+        metricL = new ArrayList<>(Arrays.asList(getGson().fromJson(jo.get(METRICS_FIELD), Metric[].class)));
 
-        return metricList;
+        return metricL;
     }
     
     /**
@@ -40,21 +41,22 @@ public class MetricList extends AbstractProvider {
      * @return  ID list as string
      */
     public String getIdsAsString() {
-        String str = "";
-        for (Metric metric : metricList) {
+        StringBuilder str = new StringBuilder();
+        for (Metric metric : metricL) {
             if (!metric.getKey().equals("new_development_cost")) {
-                str +=  metric.getKey() + ',' ;
+                str.append(metric.getKey());
+                str.append(',');
             }
         }
-        return str;
+        return str.toString();
     }
     
-    public ArrayList<Metric> getMetricList() {
-        return metricList;
+    public List<Metric> getMetricList() {
+        return metricL;
     }
 
-    public void setMetricList(ArrayList<Metric> metricList) {
-        this.metricList = metricList;
+    public void setMetricList(List<Metric> metricList) {
+        this.metricL = (ArrayList<Metric>) metricList;
     }
 
 }

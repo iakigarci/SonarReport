@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.apache.commons.csv.CSVFormat;
@@ -26,14 +27,14 @@ public class CSVExporter extends AbstractExporter {
     /**
      * Map  String: metric key  ArrayList: issue value
      */
-    private HashMap<String, ArrayList<String>> issueMap = new HashMap<String, ArrayList<String>>(); 
+    private HashMap<String, ArrayList<String>> issueMap = new HashMap<>(); 
     
     public CSVExporter(ExportConfiguration exportConfiguration) {
         super(exportConfiguration);
     }
 
     @Override
-    public File create(ArrayList<Report> pReportList, String fileName) throws IOException {
+    public File create(List<Report> pReportList, String fileName) throws IOException {
 //        File file = null;
 //        try {
 //            final String filePath = exportConfiguration.getOutput()+"\\"+pReportList.get(0).getProjectName();
@@ -48,7 +49,6 @@ public class CSVExporter extends AbstractExporter {
 //                String line = "a";
 //                csvPrinter.printRecord(line);
 //            } catch (Exception e) {
-//                // TODO: handle exception
 //                System.out.println(e);
 //            }
 //        }catch (Exception e) {
@@ -74,6 +74,8 @@ public class CSVExporter extends AbstractExporter {
                         report.getMetricList().toString()
                 );
             }
+            csvPrinter.close();
+            writer.close();
             csvPrinter.flush();
         }catch (Exception e) {
             System.out.println("Error ZipFolder :" + e);
@@ -81,9 +83,9 @@ public class CSVExporter extends AbstractExporter {
         return dir;
     }
     
-    public void createMeasureReport(ArrayList<Report> pReportList, String dirName) {
+    public void createMeasureReport(List<Report> pReportList, String dirName) {
         try {
-            ArrayList<String> headers = new ArrayList<String>();
+            ArrayList<String> headers = new ArrayList<>();
             headers.add("Metric");
             for (int i = 0; i < pReportList.size(); i++) {
                 headers.add("Measure_"+i);
@@ -93,19 +95,16 @@ public class CSVExporter extends AbstractExporter {
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
             
             csvPrinter.printRecord(headers);
-            
-            
-            
-            ArrayList<Measure> measureList = pReportList.get(0).getMeasureList();
+            ArrayList<Measure> measureList = (ArrayList<Measure>) pReportList.get(0).getMeasureList();
             for (int j = 0; j < measureList.size(); j++) {
                 Measure measure = measureList.get(j);
-                ArrayList<String> arr = new ArrayList<String>();
+                ArrayList<String> arr = new ArrayList<>();
                 arr.add(measure.getValue());
                 issueMap.put(measure.getKey(), arr);
             }
             
             for (int i = 1; i < pReportList.size(); i++) {
-                measureList = pReportList.get(i).getMeasureList();
+                measureList = (ArrayList<Measure>) pReportList.get(i).getMeasureList();
                 for (int j = 0; j < measureList.size(); j++) {
                     Measure measure = measureList.get(j);
                     addToList(measure);

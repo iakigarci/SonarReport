@@ -2,6 +2,7 @@ package providers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.google.gson.JsonObject;
 
@@ -14,13 +15,16 @@ public class MeasureList extends AbstractProvider {
     /**
      * Measure list
      */
-    private ArrayList<Measure> measureList;
+    private ArrayList<Measure> measureL;
     
     /**
      * Selected metrics
      */
     private String metrics;
-
+    /**
+     * Default metrics, if the entry is wrong or empty
+     */
+    private final static String DEFAULT_METRICS = "ncloc,complexity,violations";
     
     public MeasureList(ReportConfiguration projectRequest) {
         super(projectRequest);
@@ -31,15 +35,15 @@ public class MeasureList extends AbstractProvider {
      * 
      * @return  measure list
      */
-    public ArrayList<Measure> create() {
-        if (metrics.isEmpty() || metrics == null) {
-            metrics = "ncloc,complexity,violations";
+    public List<Measure> create() {
+        if (metrics.isEmpty()) {
+            metrics = DEFAULT_METRICS;
         }
         String str = String.format(api.getRequest("GET_MEASURES"), SonarQubeServer.getSonarQubeServer().getUrl(), super.projectRequest.getComponentKey() , metrics);
         final JsonObject jo = request(str);
-        measureList = new ArrayList<Measure>(Arrays.asList(getGson().fromJson(jo.get(COMPONENT_FIELD).getAsJsonObject().get(MEASURES_FIELD), Measure[].class)));
+        measureL = new ArrayList<>(Arrays.asList(getGson().fromJson(jo.get(COMPONENT_FIELD).getAsJsonObject().get(MEASURES_FIELD), Measure[].class)));
 
-        return measureList;
+        return measureL;
     }
 
     public String getMeasureList() {

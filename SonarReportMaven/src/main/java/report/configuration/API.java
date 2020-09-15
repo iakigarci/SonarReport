@@ -24,7 +24,7 @@ public class API {
     /**
      * Singleton instance
      */
-    public static API miAPI = null;
+    private static API miAPI = null;
 
 
     static {

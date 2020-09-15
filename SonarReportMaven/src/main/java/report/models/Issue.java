@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the state of a metric with its comments. 
@@ -66,7 +67,7 @@ public class Issue {
 
     public Issue(String severity, String key, String metric, String component, String project, String line,
             String status, String resolution, String effort, String type, String message, String language,
-            ArrayList<Comment> comments) {
+            List<Comment> comments) {
         super();
         this.severity = severity;
         this.key = key;
@@ -80,7 +81,7 @@ public class Issue {
         this.type = type;
         this.message = message;
         this.language = language;
-        this.comments = comments;
+        this.comments = (ArrayList<Comment>) comments;
     }
 
     public String getSeverity() {
@@ -131,7 +132,7 @@ public class Issue {
         return language;
     }
 
-    public ArrayList<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
     

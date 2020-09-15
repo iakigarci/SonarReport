@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import configuration.ReportConfiguration;
 
@@ -65,24 +66,6 @@ public class Report {
         this.componentKey = pReportConf.getComponentKey();
     }
 
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        StringBuilder str = new StringBuilder("");
-        str.append("El proyecto es: ");
-        str.append(projectName + "\n");
-        str.append("Autor: " + projectAuthor + "\n");
-        str.append("Branch: " + branch + "\n");
-        str.append("Component Key: " + componentKey + "\n");
-        str.append("LanguageList: " + languageList.size()+ " " + languageList.toString() + "\n");
-        str.append("IssueList: "+ issueList.size()+ " " + issueList.toString() + "\n");
-        str.append("MetricList: "+ metricList.size()+ " " + metricList.toString() + "\n");
-        str.append("MeasureList: "+ measureList.size()+ " " + measureList.toString() + "\n");
-
-        String text = str.toString();
-        return text;
-    }
-
     public String getProjectName() {
         return projectName;
     }
@@ -99,7 +82,7 @@ public class Report {
         return branch;
     }
 
-    public ArrayList<Language> getLanguageList() {
+    public List<Language> getLanguageList() {
         return languageList;
     }
 
@@ -119,34 +102,49 @@ public class Report {
         this.branch = branch;
     }
 
-    public void setLanguageList(ArrayList<Language> languageList) {
-        this.languageList = languageList;
+    public void setLanguageList(List<Language> languageList) {
+        this.languageList = (ArrayList<Language>) languageList;
     }
 
-    public void setIssueList(ArrayList<Issue> issueList) {
-        this.issueList = issueList;
+    public void setIssueList(List<Issue> issueList) {
+        this.issueList = (ArrayList<Issue>) issueList;
     }
 
     public String getComponentKey() {
         return componentKey;
     }
 
-    public ArrayList<Metric> getMetricList() {
+    public List<Metric> getMetricList() {
         return metricList;
     }
 
-    public void setMetricList(ArrayList<Metric> metricList) {
-        this.metricList = metricList;
+    public void setMetricList(List<Metric> metricList) {
+        this.metricList = (ArrayList<Metric>) metricList;
     }
 
-    public ArrayList<Measure> getMeasureList() {
+    public List<Measure> getMeasureList() {
         return measureList;
     }
 
-    public void setMeasureList(ArrayList<Measure> measureList) {
-        this.measureList = measureList;
+    public void setMeasureList(List<Measure> measureList) {
+        this.measureList = (ArrayList<Measure>) measureList;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("");
+        str.append("El proyecto es: ");
+        str.append(projectName + "\n");
+        str.append("Autor: " + projectAuthor + "\n");
+        str.append("Branch: " + branch + "\n");
+        str.append("Component Key: " + componentKey + "\n");
+        str.append("LanguageList: " + languageList.size()+ " " + languageList.toString() + "\n");
+        str.append("IssueList: "+ issueList.size()+ " " + issueList.toString() + "\n");
+        str.append("MetricList: "+ metricList.size()+ " " + metricList.toString() + "\n");
+        str.append("MeasureList: "+ measureList.size()+ " " + measureList.toString() + "\n");
+
+        return str.toString();
+    }
 
     
 }

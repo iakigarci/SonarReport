@@ -71,7 +71,7 @@ export default class ReportApp extends React.PureComponent {
 	                }
 	            });
 	        });
-	    };
+	    }
 
 	    render() {
 	        if (this.state.loading) {

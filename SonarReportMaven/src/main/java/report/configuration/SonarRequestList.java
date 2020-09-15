@@ -2,6 +2,7 @@ package configuration;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import factories.ReportFactory;
 import factories.ReportModelFactory;
@@ -35,7 +36,7 @@ public class SonarRequestList {
     private static final SonarRequestList miSonarRequestList = new SonarRequestList();
 
     private SonarRequestList() {
-        reportList = new ArrayList<Report>();
+        reportList = new ArrayList<>();
     }
 
     public static SonarRequestList getSonarRequestList() {
@@ -49,18 +50,16 @@ public class SonarRequestList {
      * @param pMetricFilter metric key list
      * @throws IllegalStateException
      */
-    public void execute(ArrayList<ReportConfiguration> projectList, ArrayList<String> pIssueFilter, ArrayList<String> pMetricFilter) throws IllegalStateException {
+    public void execute(List<ReportConfiguration> projectList, List<String> pIssueFilter, List<String> pMetricFilter) throws IllegalStateException {
         
-        issueFilter = pIssueFilter;
-        metricFilter = pMetricFilter;
+        issueFilter = (ArrayList<String>) pIssueFilter;
+        metricFilter = (ArrayList<String>) pMetricFilter;
         
         SonarQubeServer.getSonarQubeServer().init(StringManager.getProperty("sonar.url"), false, 0, Integer.parseInt(PluginStringManager.getProperty("plugin.since")), 0, 0, true);
         if (projectList.isEmpty()) {
             throw new IllegalStateException("Please, give the correct parameters.");
         }
-
-        ReportModelFactory reportModelFactory = new ReportModelFactory();
-
+        ReportModelFactory reportModelFactory;
         for (ReportConfiguration reportConf : projectList) {
             reportModelFactory = new ReportModelFactory(reportConf);
             Report report = reportModelFactory.create();
@@ -75,18 +74,18 @@ public class SonarRequestList {
         }
     }
 
-    private ArrayList<ReportConfiguration> createReportConfigurationList(ArrayList<ArrayList<String>> projectList) {
-        ArrayList<ReportConfiguration> pReportConfList = new ArrayList<ReportConfiguration>();
-        
-        for (int i = 0; i < projectList.size(); i++) {
-            ArrayList<String> array = projectList.get(i);
-            ReportConfiguration conf = new ReportConfiguration(array.get(0), array.get(1), array.get(2), array.get(3), array.get(4), array.get(5));
-            pReportConfList.add(conf);
-        }
-        return pReportConfList;
-    }
+//    private ArrayList<ReportConfiguration> createReportConfigurationList(ArrayList<ArrayList<String>> projectList) {
+//        ArrayList<ReportConfiguration> pReportConfList = new ArrayList<ReportConfiguration>();
+//        
+//        for (int i = 0; i < projectList.size(); i++) {
+//            ArrayList<String> array = projectList.get(i);
+//            ReportConfiguration conf = new ReportConfiguration(array.get(0), array.get(1), array.get(2), array.get(3), array.get(4), array.get(5));
+//            pReportConfList.add(conf);
+//        }
+//        return pReportConfList;
+//    }
 
-    public ArrayList<Report> getReportList() {
+    public List<Report> getReportList() {
         return reportList;
     }
 
@@ -94,20 +93,20 @@ public class SonarRequestList {
         this.reportList = reportList;
     }
 
-    public ArrayList<String> getIssueFilter() {
+    public List<String> getIssueFilter() {
         return issueFilter;
     }
 
-    public void setIssueFilter(ArrayList<String> issueFilter) {
-        this.issueFilter = issueFilter;
+    public void setIssueFilter(List<String> issueFilter) {
+        this.issueFilter = (ArrayList<String>) issueFilter;
     }
 
-    public ArrayList<String> getMetricFilter() {
+    public List<String> getMetricFilter() {
         return metricFilter;
     }
 
-    public void setMetricFilter(ArrayList<String> metricFilter) {
-        this.metricFilter = metricFilter;
+    public void setMetricFilter(List<String> metricFilter) {
+        this.metricFilter = (ArrayList<String>) metricFilter;
     }
 
     public ExportConfiguration getExportConfiguration() {

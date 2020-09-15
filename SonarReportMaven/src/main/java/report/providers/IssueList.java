@@ -21,11 +21,11 @@ public class IssueList extends AbstractProvider {
     /**
      * Issue list
      */
-    private ArrayList<Issue> issueList;
+    private ArrayList<Issue> issueL;
     
     public IssueList(ReportConfiguration projectRequest) {
         super(projectRequest);
-        issueList = new ArrayList<Issue>();
+        issueL = new ArrayList<Issue>();
     }
 
    /**
@@ -34,7 +34,7 @@ public class IssueList extends AbstractProvider {
     * @param    args    array of String arrays. [0] severities list, [1] resolution list, [2] type list
     * @return   issue's list
     */
-    public ArrayList<Issue> getIssueList(ArrayList<String> args) {
+    public List<Issue> getIssueList(List<String> args) {
         String str = null;
         try {
             str = String.format(api.getRequest("GET_ISSUES"), SonarQubeServer.getSonarQubeServer().getUrl(), super.projectRequest.getComponentKey(), args.get(0), args.get(1), args.get(2));
@@ -42,20 +42,19 @@ public class IssueList extends AbstractProvider {
             throw new IllegalStateException("Los argumentos no son validos");
         }
         final JsonObject jo = request(str);
-        issueList = new ArrayList<Issue>(Arrays.asList(getGson().fromJson(jo.get(ISSUE_FIELD), Issue[].class)));
-        return issueList;
+        issueL = new ArrayList<>(Arrays.asList(getGson().fromJson(jo.get(ISSUE_FIELD), Issue[].class)));
+        return issueL;
     }
     
     
     public List<Issue> getList() {
-        return issueList;
+        return issueL;
     };
     
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         String str = ("Lista de issue: ");
-        for (Issue issue : issueList) {
+        for (Issue issue : issueL) {
             str = str + ","+issue.getKey() + " " + issue.getMetric() + " " + issue.getMessage();
         }
         return str;

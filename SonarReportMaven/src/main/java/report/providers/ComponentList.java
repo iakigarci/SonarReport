@@ -2,6 +2,7 @@ package providers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.google.gson.JsonObject;
 
@@ -19,7 +20,7 @@ public class ComponentList extends AbstractProvider {
     /**
      * Component list
      */
-    private ArrayList<Component> componentList;
+    private ArrayList<Component> componentL;
     
     public ComponentList(ReportConfiguration projectRequest) {
         super(projectRequest);
@@ -30,11 +31,11 @@ public class ComponentList extends AbstractProvider {
      * 
      * @return  component list
      */
-    public ArrayList<Component> execute() {
+    public List<Component> execute() {
         String str = String.format(api.getRequest("GET_COMPONENTS"), SonarQubeServer.getSonarQubeServer().getUrl(), super.projectRequest.getComponentKey(), "DIR, BRC, FIL");
         final JsonObject jo = request(str);
-       componentList = new ArrayList<Component>(Arrays.asList(getGson().fromJson(jo.get(COMPONENT_FIELD), Component[].class)));
+        componentL = new ArrayList<>(Arrays.asList(getGson().fromJson(jo.get(COMPONENT_FIELD), Component[].class)));
 
-        return componentList;
+        return componentL;
     }
 }

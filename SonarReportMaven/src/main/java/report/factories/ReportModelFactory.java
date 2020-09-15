@@ -1,6 +1,8 @@
 package factories;
 
 
+import java.util.ArrayList;
+
 import configuration.ReportConfiguration;
 import configuration.SonarRequestList;
 import models.Report;
@@ -15,10 +17,6 @@ public class ReportModelFactory {
      * ReportConfiguration instance
      */
     private ReportConfiguration reportConf;
-    /**
-     * Generated report
-     */
-    private Report report;
     
 
     public ReportModelFactory(ReportConfiguration reportConf) {
@@ -34,6 +32,7 @@ public class ReportModelFactory {
      * @return  Gemerated report
      */
     public Report create() {
+        Report report;
         SonarRequestList sonarRequest = SonarRequestList.getSonarRequestList();
         ProviderFactory providerF = new ProviderFactory(reportConf);
         LanguageList languageList = providerF.create(LanguageList.class);
@@ -43,11 +42,10 @@ public class ReportModelFactory {
         report = new Report(reportConf);
 
         report.setLanguageList(languageList.getLanguageList());
-        report.setIssueList(issueList.getIssueList(sonarRequest.getIssueFilter()));
-        report.setMetricList(metricList.create(sonarRequest.getMetricFilter()));
+        report.setIssueList(issueList.getIssueList((ArrayList<String>) sonarRequest.getIssueFilter()));
+        report.setMetricList(metricList.create((ArrayList<String>) sonarRequest.getMetricFilter()));
         measureList.setMetricList(metricList.getIdsAsString());
         report.setMeasureList(measureList.create());
-        // System.out.println(report.toString());
 
         return report;
     }

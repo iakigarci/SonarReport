@@ -30,7 +30,6 @@ public class Measure {
     
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return this.metric + "-" + this.value;
     }
 }
