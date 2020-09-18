@@ -34,7 +34,7 @@ public class CSVExporter extends AbstractExporter {
     }
 
     @Override
-    public File create(List<Report> pReportList, String fileName) throws IOException {
+    public File createFiles(List<Report> pReportList, String fileName) throws IOException {
 //        File file = null;
 //        try {
 //            final String filePath = exportConfiguration.getOutput()+"\\"+pReportList.get(0).getProjectName();

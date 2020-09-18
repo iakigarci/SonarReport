@@ -2,7 +2,6 @@ package exporters;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import configuration.ExportConfiguration;
@@ -33,6 +32,6 @@ public abstract class AbstractExporter {
      * @return  generated file
      * @throws IOException
      */
-    public abstract File create(List<Report> pReportList, String path) throws IOException;
+    public abstract File createFiles(List<Report> pReportList, String path) throws IOException;
     
 }

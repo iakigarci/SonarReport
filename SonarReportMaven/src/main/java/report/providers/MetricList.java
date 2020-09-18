@@ -27,7 +27,7 @@ public class MetricList extends AbstractProvider {
      * @param   pMetricFilter 
      * @return  metric list
      */
-    public List<Metric> create(ArrayList<String> pMetricFilter) {
+    public List<Metric> createMetricList(ArrayList<String> pMetricFilter) {
         String str = String.format(api.getRequest("GET_METRICS"), SonarQubeServer.getSonarQubeServer().getUrl());
         final JsonObject jo = request(str);
         metricL = new ArrayList<>(Arrays.asList(getGson().fromJson(jo.get(METRICS_FIELD), Metric[].class)));
@@ -51,7 +51,7 @@ public class MetricList extends AbstractProvider {
         return str.toString();
     }
     
-    public List<Metric> getMetricList() {
+    public List<Metric> getList() {
         return metricL;
     }
 

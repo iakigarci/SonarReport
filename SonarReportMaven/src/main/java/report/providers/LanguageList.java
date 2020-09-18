@@ -27,11 +27,15 @@ public class LanguageList extends AbstractProvider {
         languageL = new ArrayList<>();
     }
 
-    public List<Language> getLanguageList() {
+    public List<Language> createLanguageList() {
         String str = String.format(api.getRequest("GET_LANGUAGES"), SonarQubeServer.getSonarQubeServer().getUrl());
         final JsonObject jo = request(str);
         languageL = new ArrayList<>(Arrays.asList(getGson().fromJson(jo.get(LANGUAGES_FIELD), Language[].class)));
 
+        return languageL;
+    }
+
+    public List<Language> getList() {
         return languageL;
     }
 

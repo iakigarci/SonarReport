@@ -62,7 +62,7 @@ function getUserName(login) {
 
 // Macro function used to execute the whole plugin token process
 export function initiatePluginToken() {
-  const name = "cnes-report";
+  const name = "indaba_report";
 
   return revokeToken(name).then(() => {
     return createToken(name).then(tokenResponse => {

@@ -61,8 +61,8 @@ public class ReportFactory {
         //TODO Have to add a if for each new export method
         if (exportConfiguration.isEnableCSV()) {
             CSVExporter csvExporter = new CSVExporter(exportConfiguration);
-            String fileName = formatFilename(CSV_FILENAME, exportConfiguration.getOutput(), pReportList.get(0).getProjectName());
-            csvExporter.create(pReportList, fileName);
+            String fileName = formatFilename(CSV_FILENAME, exportConfiguration.getOutput(), "INDABA");
+            csvExporter.createFiles(pReportList, fileName);
         }
     }
 

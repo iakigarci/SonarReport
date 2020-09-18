@@ -35,7 +35,7 @@ public class MeasureList extends AbstractProvider {
      * 
      * @return  measure list
      */
-    public List<Measure> create() {
+    public List<Measure> createMeasureList() {
         if (metrics.isEmpty()) {
             metrics = DEFAULT_METRICS;
         }
@@ -46,11 +46,11 @@ public class MeasureList extends AbstractProvider {
         return measureL;
     }
 
-    public String getMeasureList() {
-        return metrics;
+    public List<Measure> getList() {
+        return measureL;
     }
 
-    public void setMetricList(String metricList) {
+    public void setMetricFilterList(String metricList) {
         this.metrics = metricList;
     }
 }

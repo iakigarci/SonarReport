@@ -41,11 +41,12 @@ public class ReportModelFactory {
         MeasureList measureList = providerF.create(MeasureList.class);
         report = new Report(reportConf);
 
-        report.setLanguageList(languageList.getLanguageList());
-        report.setIssueList(issueList.getIssueList((ArrayList<String>) sonarRequest.getIssueFilter()));
-        report.setMetricList(metricList.create((ArrayList<String>) sonarRequest.getMetricFilter()));
-        measureList.setMetricList(metricList.getIdsAsString());
-        report.setMeasureList(measureList.create());
+        //Set lists
+        report.setLanguageList(languageList.createLanguageList());
+        report.setIssueList(issueList.createIssueList((ArrayList<String>) sonarRequest.getIssueFilter()));
+        report.setMetricList(metricList.createMetricList((ArrayList<String>) sonarRequest.getMetricFilter()));
+        measureList.setMetricFilterList(metricList.getIdsAsString());
+        report.setMeasureList(measureList.createMeasureList());
 
         return report;
     }

@@ -92,7 +92,7 @@ public class CommandLineManager {
     }
 
     private void printHelp() {
-        helpFormatter.printHelp(128, "java -jar cnesreport.jar",
+        helpFormatter.printHelp(128, "java -jar reportindaba.jar",
                 "Generate editable reports for SonarQube projects.\n\n", options,
                 "\n\nPlease report issues", true);
     }

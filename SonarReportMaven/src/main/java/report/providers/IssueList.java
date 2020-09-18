@@ -34,7 +34,7 @@ public class IssueList extends AbstractProvider {
     * @param    args    array of String arrays. [0] severities list, [1] resolution list, [2] type list
     * @return   issue's list
     */
-    public List<Issue> getIssueList(List<String> args) {
+    public List<Issue> createIssueList(List<String> args) {
         String str = null;
         try {
             str = String.format(api.getRequest("GET_ISSUES"), SonarQubeServer.getSonarQubeServer().getUrl(), super.projectRequest.getComponentKey(), args.get(0), args.get(1), args.get(2));
