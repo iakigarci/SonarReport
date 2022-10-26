@@ -50,7 +50,9 @@ The CLI aplications returns the metrics in CSV formar from a JAR compiled projec
 
 For mor information, check the documentation: [Documentation](Documentaci_n_Plugin_Sonar.pdf)(Spanish)
 
-[!alt text]()
+<p align="center">
+  <img src="https://github.com/iakigarci/SonarReport/blob/master/uml/out/componentes/components.png" />
+</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
